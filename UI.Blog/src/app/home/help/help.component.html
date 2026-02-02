@@ -1,0 +1,375 @@
+<div class="py-12">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <h1 class="text-xl text-white bg-black rounded transition-colors hover:text-blue-500 px-4">Grid en Tailwind Css</h1>
+        <p>Se inicializa el gid con grid grid-cols-4 <--aqui se indica cuantas columnas quiero (Se pueden agregar
+                hasta 12 si quiero más lo configuro en el archivo tailwind) </p>
+                <a class="text-blue-500 underline" href="https://tailwindcss.com/docs/grid-template-columns"
+                    target="_blank" rel="noopener noreferrer">Grid</a>
+                <p>El Gap es para darle espaciado entre columnas y filas. </p>
+                <a class="text-blue-500 underline" href="https://tailwindcss.com/docs/gap" target="_blank"
+                    rel="noopener noreferrer">Gap</a>
+                <br> Ten en cuenta la responsividad
+                <p>Con ayuda de col-span-2 <---Indico cuantas columnas quiero puedo hacer que un div ocupe mas de un
+                        espacio</p>
+                        <a class="text-blue-500 underline"
+                            href="https://tailwindcss.com/docs/grid-column#spanning-columns" target="_blank"
+                            rel="noopener noreferrer">col-span</a>
+                        <div class="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-4">
+                            <div class="bg-blue-200">A</div>
+                            <div class="bg-blue-300">B</div>
+                            <div class="bg-blue-400">C</div>
+                            <div class="bg-blue-500">D</div>
+                            <div class="bg-blue-600">E</div>
+                            <div class="bg-blue-700">F</div>
+                        </div>
+
+                        <div class="grid grid-cols-4 gap-4 my-4">
+                            <div class="bg-red-200 sm:col-span-2 md:col-span-3 lg:col-span-4">A</div>
+                            <div class="bg-red-300">B</div>
+                            <div class="bg-red-400">C</div>
+                            <div class="bg-red-500">D</div>
+                            <div class="bg-red-600">E</div>
+                            <div class="bg-red-700">F</div>
+                            <div class="bg-red-500">G</div>
+                            <div class="bg-red-600">H</div>
+                            <div class="bg-red-700">I</div>
+                        </div>
+                        <p>Se le puede agregar que ocupen mas espacio en vertical a las columnas con ayuda de
+                            grid-rows
+                        </p>
+                        <a class="text-blue-500 underline" href="https://tailwindcss.com/docs/grid-row#basic-usage"
+                            target="_blank" rel="noopener noreferrer">row-span</a>
+                        <div class="grid grid-cols-4 grid-rows-2 gap-4 my-4">
+                            <div class="bg-green-200">A</div>
+                            <div class="bg-green-300">B</div>
+                            <div class="bg-green-400 col-span-2 row-span-2">C</div>
+                            <div class="bg-green-500">D</div>
+                            <div class="bg-green-600">E</div>
+                        </div>
+                        <p>Controlar la ubicación de los elementos de la cuadrícula</p>
+                        <a class="text-blue-500 underline"
+                            href="https://tailwindcss.com/docs/grid-auto-flow#controlling-grid-element-placement"
+                            target="_blank" rel="noopener noreferrer">grid-flow</a>
+                        <div class="grid grid-flow-col grid-rows-3">
+                            <div class="bg-yellow-100">1</div>
+                            <div class="bg-yellow-200">2</div>
+                            <div class="bg-yellow-300">3</div>
+                            <div class="bg-yellow-400">4</div>
+                            <div class="bg-yellow-500">5</div>
+                            <div class="bg-yellow-600">6</div>
+                            <div class="bg-yellow-700">7</div>
+                            <div class="bg-yellow-800">8</div>
+                            <div class="bg-yellow-900">9</div>
+                        </div>
+                        <h1 class="text-xl text-white bg-black rounded transition-colors hover:text-blue-500 my-4 px-4">Aspect Radio</h1>
+                        <p>Se usa el w-full<--- se puede cambiar o h-full para dar tamaño en tailwind</p>
+                                <p>
+                                    Le da tamaños para poder dar dimensiones a una etiqueta html por ejemplo en un
+                                    video
+                                </p>
+                                <a class="text-blue-500 underline" href="https://tailwindcss.com/docs/aspect-ratio"
+                                    target="_blank" rel="noopener noreferrer">aspect-ratio</a>
+                                <div class="container mx-auto py-12">
+                                    <div class="grid grid-cols-3 gap-6">
+                                        <div class="col-span-2">
+                                            <iframe class="w-full aspect-video"
+                                                src="https://www.youtube.com/embed/JA7VbUsdb68?si=n1Peck6qZMGNPOlG"
+                                                title="YouTube video player" frameborder="0"
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                                allowfullscreen></iframe>
+                                            <div class="bg-red-400 aspect-[2/1] p-4">
+                                                <p>Se puede usar en muchas etiquetas html</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-span-1 bg-blue-200"></div>
+                                        <div></div>
+                                    </div>
+                                </div>
+
+
+                        <h1 class="text-xl text-white bg-black rounded transition-colors hover:text-blue-500 my-4 px-4">Colums</h1>
+                        <p>Esto sirve por ejemplo mostrar las imagenes de tamaño diferente ordenadas y tener un mejor aspecto. <br>
+                        se usa columns-4 <--- se pone cuantas columnas quiero
+                        </p>
+                        <a class="text-blue-500 underline" href="https://tailwindcss.com/docs/columns#adding-based-on-column-count" target="_blank" rel="noopener noreferrer">Columns</a>
+                        <div class="columns-4 gap-0">
+                            <img src="https://cdn.pixabay.com/photo/2023/04/11/13/27/bird-7917250_1280.jpg" alt="">
+                            <img src="https://cdn.pixabay.com/photo/2023/07/12/17/23/activity-8122959_1280.jpg" alt="">
+                            <img src="https://cdn.pixabay.com/photo/2024/02/06/18/27/arabiccontest-8557664_1280.jpg" alt="">
+                            <img src="https://cdn.pixabay.com/photo/2024/01/09/13/08/mountains-8497575_1280.jpg" alt="">
+                            <img src="https://cdn.pixabay.com/photo/2023/10/06/06/54/fantasy-8297567_1280.png" alt="">
+                            <img src="https://cdn.pixabay.com/photo/2023/10/30/02/35/girl-8351533_1280.jpg" alt="">
+                            <img src="https://cdn.pixabay.com/photo/2024/02/17/13/21/candy-town-8579300_1280.jpg" alt="">
+                        </div>
+                        <p>Considera el break-after-column o break-before-column para cuando una etiquta no se divida en dos por ejemplo aqui es el texto, lo uso para que se salte a la otra columna, igualmente puedes forzarlo con ayuda de  break-inside-avoid-column</p>
+                        <div class="columns-2 py-4">
+                            <p class="bg-red-200">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sodales in nunc vel feugiat. Mauris posuere turpis felis, non vestibulum odio ultrices nec. Proin nec porta orci. Mauris luctus urna purus, ut semper libero hendrerit in. Fusce justo purus, maximus nec congue auctor, scelerisque vel ipsum. Sed posuere blandit erat. Curabitur non felis et augue mollis accumsan. Fusce pretium tincidunt feugiat. Curabitur sem enim, mollis id pellentesque et, placerat eget metus. Pellentesque at congue justo, eu sodales ligula. Donec vestibulum iaculis consequat.</p>
+                            <p class="bg-blue-200">Nunc elementum erat quis metus cursus placerat. Praesent dapibus, sem eget maximus blandit, sapien orci auctor leo, nec lobortis dolor libero ut lorem. In vitae libero ornare, commodo elit nec, vulputate ex. Aenean imperdiet justo arcu, sed commodo nisl semper id. Cras non faucibus risus. Nullam erat arcu, egestas venenatis maximus at, tempus at dui. Cras egestas imperdiet turpis id ornare. Maecenas et tincidunt velit, quis varius ex. Phasellus ullamcorper dapibus velit, ullamcorper rhoncus nulla pharetra vel. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
+                            <p class="bg-green-200 break-inside-avoid-column">Morbi blandit mattis velit, sit amet malesuada est consectetur eget. Nam maximus, felis et euismod accumsan, dolor ipsum fringilla est, id mollis magna purus quis eros. Pellentesque id sem aliquam, aliquet enim sit amet, feugiat est. Nulla suscipit lorem id facilisis molestie. Fusce non luctus diam, ut euismod mauris. In bibendum diam eget nibh imperdiet ultricies. Curabitur non lectus metus. Ut tortor neque, imperdiet non maximus sit amet, dapibus blandit enim. Nullam ullamcorper interdum libero sit amet maximus. Proin efficitur dui luctus turpis blandit convallis. Ut quis ligula elementum, auctor felis eget, lobortis mi.</p>
+                            <p class="bg-indigo-200">Aliquam erat volutpat. Vivamus ut scelerisque ligula. Vestibulum sed ante ut quam auctor vulputate. Suspendisse id lectus ut justo viverra cursus eu vitae nisi. Aliquam tincidunt lorem quis ipsum pretium, ac sollicitudin ligula elementum. Vestibulum tristique risus non tortor placerat, ut aliquet libero feugiat. Curabitur vel iaculis leo. Donec efficitur quam sed lectus finibus, id placerat libero euismod. In vel nisl pellentesque velit condimentum tincidunt. Duis interdum, massa ut pharetra vulputate, lectus dolor sagittis metus, nec sodales quam nulla eu leo. Proin scelerisque orci at placerat molestie. Etiam aliquam diam non luctus interdum. Nam sodales pellentesque leo, ac mollis neque auctor quis. Integer molestie ipsum vel neque ultrices, ac lacinia ante suscipit.</p>
+                            <p class="bg-yellow-200">Phasellus dui leo, hendrerit eget eros id, fringilla placerat ante. Sed id lorem id metus maximus sollicitudin. Morbi euismod felis eu cursus cursus. Maecenas scelerisque dui venenatis massa rhoncus, sed pulvinar est suscipit. In sed porta dolor. Fusce sem nulla, ornare non libero quis, pharetra fermentum lectus. Aliquam erat volutpat. Phasellus turpis ex, gravida vel est a, cursus ultricies eros. Cras malesuada porta nulla, vel maximus nibh vulputate mollis. Aenean id commodo ligula, vel cursus lectus. Pellentesque vulputate vulputate quam. Sed sollicitudin ante ac purus accumsan, sed auctor erat pretium. Maecenas sed bibendum nisi. Cras posuere ligula id tortor mollis aliquet. In hac habitasse platea dictumst.</p>
+                        </div>
+
+
+
+                        <h1 class="text-xl text-white bg-black rounded transition-colors hover:text-blue-500 my-4 px-4">Display</h1>
+                        <p class="py-6">El display sirve para que la etiqueta ocupe el maximo tamaño posible o el mernor tamaño posible, para que a una etiqueta en linea se le pueda agregar clases que una etiqueta en bloque si acepta tenemos que ponerle <strong>inline-block</strong></p>
+                        <a class="text-blue-500 underline block" href="https://tailwindcss.com/docs/display" target="_blank" rel="noopener noreferrer">Display</a>
+                       <div class="container mx-auto py-12">
+
+                        <div class="flex">
+                            <div>1</div>
+                            <div>2</div>
+                            <div>3</div>
+                        </div>
+
+                        <p class="bg-red-200 hidden lg:inline-block mb-4">Esta es una etiqueta en bloque</p>
+                        <p class="bg-red-200 inline-block mb-4">Esta es una etiqueta en bloque</p>
+                        <div class="bg-red-200 ">Esta tambien es una etiqueta en bloque</div>
+                        <blockquote class="bg-red-200">Esta tambien es una etiqueta en bloque</blockquote>
+
+                        <span class="bg-blue-300 block">Etiqueta inline</span>
+                        <a class="bg-green-300" href="#">esta tambien es una etiqueta inline</a>
+                       </div>
+
+
+                       <h1 class="text-xl text-white bg-black rounded transition-colors hover:text-blue-500 my-4 px-4">Tipografias</h1>
+                       <div class="container mx-auto py-4">
+                           <p>Decoradores del texto </p>
+                           <a class="text-blue-500 underline block" href="https://tailwindcss.com/docs/font-family" target="_blank" rel="noopener noreferrer">tipografia</a>
+                           
+                           <h1 class="font-sans text-3xl mt-4 lg:font-black md:font-bold">Titulo de prueba</h1>
+                        <p class="font-serif leading-tight -ml-3">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Recusandae suscipit placeat rem! Delectus repellendus similique sint magnam, mollitia repudiandae itaque, perspiciatis soluta harum voluptatum rem officiis sed voluptas, sequi quidem.</p>
+                        <ul class="font-mono text-sm italic mt-4">
+                            <li>Elemento #1</li>
+                            <li>Elemento #2</li>
+                            <li>Elemento #3</li>
+                        </ul>
+                       </div>
+                       <div class="container mx-auto py-4">
+                            <p class="font-mont font-thin">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto, soluta quae, eos iste quibusdam sequi hic nesciunt dolorum alias similique natus ducimus blanditiis provident praesentium, corrupti consequuntur voluptate beatae nostrum!</p>
+                            <p class="font-mont font-extralight">Et nesciunt nihil odio at nobis provident tempore dicta laudantium veritatis pariatur in consequuntur vel, unde ullam earum culpa ipsum esse voluptas? Architecto cupiditate maiores, quos et asperiores rem quis.</p>
+                            <p class="font-mont font-bold">Non nesciunt porro molestias nemo maiores, provident architecto fuga iste, qui quia velit! Officiis ut repellendus ipsa beatae aperiam excepturi reiciendis possimus? Officia ratione id sit amet eligendi, similique assumenda.</p>
+                            <p class="font-mont font-black">Natus quis tempora porro, adipisci veritatis aliquam ad fuga dolores quisquam, beatae ratione exercitationem culpa rem neque eius distinctio harum explicabo, voluptate inventore iste aperiam eos nihil quam assumenda. Numquam.</p>
+                            <p class="mt-4 tracking-widest">Espacio entre letras</p>
+                            <p class="tracking-tight ...">The quick brown fox ...</p>
+                            <p class="tracking-normal ...">The quick brown fox ...</p>
+                            <p class="tracking-wide ...">The quick brown fox ...</p>
+                       </div>
+                       <div class="container mx-auto py-4">
+                        <small class="bg-green-200">Para centrar un texto se utiliza text-center</small>
+                        <h1 class="text-xl font-bold text-left md:text-center lg:text-right">Este es el titulo</h1>
+
+                        <p class="text-red-700 hover:text-blue-900 transition-colors">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, earum quos eveniet laborum accusamus labore minima tempora explicabo dolore facere sit nemo id, quaerat optio repellat aut non natus ab.</p>
+                            <ul class="list-decimal md:list-disc list-inside">
+                                <li class="line-through">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quibusdam illo optio odit officiis corporis rem, harum explicabo eaque aperiam provident veritatis asperiores temporibus a debitis culpa consequuntur, beatae, voluptate odio.</li>
+                                <li class="uppercase">Dolorum ratione quaerat expedita quidem eveniet accusamus nesciunt quisquam quam. Vero aut quidem officia ipsa aspernatur, adipisci laboriosam saepe exercitationem voluptatem facere id sit nisi corrupti deleniti debitis est culpa.</li>
+                                <li class=" lowercase">Rerum dolore vel dicta amet harum placeat repellat commodi? Quidem assumenda voluptatum consequatur eius recusandae aut, minus deleniti dolor tempora laboriosam illum provident voluptatibus reiciendis blanditiis aspernatur iure ipsam veritatis.</li>
+                                <li class=" capitalize">Earum exercitationem aperiam consequatur, ut doloribus eaque, porro eos dolorum aspernatur, accusantium similique! Totam sed accusantium, illum eveniet minima molestias, at obcaecati et veritatis nihil ratione enim quasi facere amet!</li>
+                                <li>Est nostrum aliquid corporis tempora fuga nihil quasi incidunt, asperiores corrupti nisi tempore atque dolorum assumenda similique eaque ab provident, culpa id harum voluptas cum eligendi? Dicta, aspernatur eum. Debitis?</li>
+                            </ul>
+                        </div>
+                       <h1 class="text-xl text-white bg-black rounded transition-colors hover:text-blue-500 my-4 px-4">Backgrounds</h1>
+                       <p>Aqui vemos como centrar una imagen en un contenedor</p>
+                       <a class="text-blue-500 underline block" href="https://tailwindcss.com/docs/background-size" target="_blank" rel="noopener noreferrer">Backgroud</a>
+
+
+                        <div class="container">
+                            <h1 class="text-center text-3xl font-bold mb-3">Background</h1>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta dignissimos quaerat ipsa magnam facere harum culpa qui molestias quis cum similique nulla cumque delectus sed, officiis minima quibusdam nisi adipisci?</p>
+                        <div class="imagen bg-cover bg-center border-8 border-blue-600 border-dashed bg-clip-content p-4"></div>
+                        <div class="imagen2 bg-fixed"></div>
+                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Est aperiam commodi labore, aliquam neque, dolor, corrupti magni nesciunt quibusdam eveniet aut! Quis accusantium, voluptatibus odio vitae perferendis nemo odit cumque.</p>
+                            <p>Saepe ipsam obcaecati accusamus eveniet suscipit, minus cumque distinctio cum recusandae quod quidem error deserunt aliquid ea perspiciatis, omnis facilis autem! Explicabo voluptate tempore odit similique repudiandae qui quod sed!</p>
+                            <p>Quidem reprehenderit repellendus cumque, corporis commodi distinctio! Placeat modi rerum velit adipisci dignissimos non, saepe eos ex aliquam earum? Unde, doloribus! Facere nam quae nesciunt sint voluptates. Nostrum, sit fuga!</p>
+                            <p>Sunt, laborum cumque! Architecto reiciendis possimus quaerat alias dicta quos! Explicabo doloribus laudantium autem consequatur magni quia nostrum id, deserunt perferendis. Autem, aperiam optio molestias commodi laboriosam libero vero provident.</p>
+                            <p>Deserunt, odio ipsam tempora eos, autem quidem nihil molestias, unde dignissimos dolore quis quos necessitatibus animi natus vero. Officia in harum incidunt earum distinctio obcaecati cum aspernatur delectus quod adipisci.</p>
+                            <p>Error, provident recusandae nobis possimus dolor repellat saepe maxime. Illum delectus molestiae natus incidunt quia doloremque, excepturi libero, laborum beatae necessitatibus facere accusantium iusto culpa sequi facilis in nostrum iure.</p>
+                            <p>Sint sapiente voluptatem debitis, enim nesciunt ducimus, id similique iusto vel impedit iure. Natus vel reiciendis debitis aperiam labore exercitationem minus quos dolor! Libero ut ad sunt exercitationem rem ea.</p>
+                            <p>Veniam assumenda similique ipsam recusandae cupiditate nihil aspernatur, consequatur non atque suscipit ipsum commodi. Voluptatum nobis dolore quidem ab aliquam consectetur quia eligendi dolores. Repudiandae aperiam at minus suscipit minima.</p>
+                            <p>Facere doloremque similique assumenda mollitia vero rem excepturi exercitationem temporibus culpa, blanditiis sapiente numquam perferendis, laudantium atque fuga dolore quibusdam nobis et. Cum, excepturi! Adipisci accusamus nemo iste molestiae culpa!</p>
+                            <p>Eum, accusantium dolor earum perferendis iure repudiandae id enim quis voluptates cumque explicabo minus a, debitis neque ad maxime commodi tenetur aperiam facere quas porro impedit ducimus. Magni, temporibus nobis.</p>
+                        </div>
+
+
+                        <!-- {{-- <div class="bg-blue-700 h-12 mt-6 bg-opacity-50"> --}} -->
+                        <div class=" bg-gradient-to-r from-blue-500 via-green-600 to-yellow-400 text-center font-extrabold text-5xl bg-clip-text text-transparent">
+                            Hola mundo!!
+                        </div>
+
+
+                       <h1 class="text-xl text-white bg-black rounded transition-colors hover:text-blue-500 my-4 px-4">Backgrounds</h1>
+                        <div class="container mx-auto pt-5">
+                       <a class="text-blue-500 underline block" href="https://tailwindcss.com/docs/border-color" target="_blank" rel="noopener noreferrer">Borde</a>
+
+                            <div class="w-64 h-32 bg-gray-500 border-8 border-blue-800 hover:border-opacity-75 border-double rounded-full">
+                            </div>
+
+                            <p class="mt-4 bg-green-50 font-bold">
+                                Podemos usar las clases divide para ponerle bordes a muchas etiquetas dentro de un div por ejemplo sin tener que ponerle clases de borde a cada etiqueta por separado
+                            </p>
+                       <a class="text-blue-500 underline block" href="https://tailwindcss.com/docs/divide-style" target="_blank" rel="noopener noreferrer">Divide</a>
+
+                            <div class=" divide-y-8 divide-gray-600 divide-dashed">
+                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Perspiciatis voluptatum harum inventore fuga ex magnam veniam officiis ipsum totam, optio quam doloribus impedit ullam corporis possimus dolore! Sit, eius nobis.</p>
+                                <p>Maxime dolorum quaerat, dolore ipsam magni molestias numquam natus quae exercitationem! Quidem consequatur exercitationem nobis corporis quos, adipisci voluptatibus a tenetur atque porro provident perspiciatis, ullam fuga placeat beatae iure!</p>
+                                <p>Voluptas quae sequi ducimus? Reiciendis, inventore odio amet et iure tempora molestiae ex deleniti sapiente totam consequatur eius? Repellat, beatae ipsum. Similique maiores dolor ratione minus nesciunt labore reprehenderit magni.</p>
+                                <p>Nobis dolorem fuga saepe dolores at quidem assumenda, voluptatum doloremque ipsam eum dignissimos odit iste eaque nulla ullam aliquid quas labore nihil harum, aspernatur quo nemo cupiditate non tempore. Suscipit.</p>
+                                <p>Quibusdam excepturi eaque velit harum vel omnis tenetur repellat ut aliquid molestias doloremque soluta fugit voluptatum molestiae facilis dolor et distinctio assumenda magni, maxime impedit. Deserunt accusamus ipsa modi excepturi?</p>
+                            </div>
+                        </div>
+                      
+                        <nav class="divide-x-2 divide-blue-600 mt-4">
+                            <a href="">Link 1</a>
+                            <a href="">Link 2</a>
+                            <a href="">Link 3</a>
+                            <a href="">Link 4</a>
+                            <a href="">Link 5</a>
+                        </nav>
+
+
+                       <h1 class="text-xl text-white bg-black rounded transition-colors hover:text-blue-500 my-4 px-4">Tablas</h1>
+                       <div class="container">
+                            <p>Para asignarle clases a las tablas podemos crear una clase tabla y ponerle todo el diseño que se te ocuerra en el archivo css para luego usarlo aqui, hay un ejemplo.
+                                Podemos darle tamaño a las columas dandole estilos solo a los th o headers de la tabla por ejemplo w-1/4 w-1/4 w-1/2
+                            </p>
+                       <a class="text-blue-500 underline block" href="https://tailwindcss.com/docs/table-layout" target="_blank" rel="noopener noreferrer">Algunas etiquetas table que ayudan</a>
+
+                           <table class="table mt-4 w-full lg:border-collapse border-separate table-fixed">
+                               <thead>
+                                <tr>
+                                <th class="w-1/4">País</th>
+                                <th class="w-1/4">Ciudad</th>
+                                <th class="w-1/2">Descripción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Perú</td>
+                                    <td>Lima</td>
+                                    <td>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni eveniet voluptatem eius quos soluta obcaecati odit reprehenderit inventore, sapiente temporibus vel atque molestiae optio consequuntur nisi voluptatibus esse quaerat quidem.</td>
+                                </tr>
+                                <tr>
+                                    <td>Colombia</td>
+                                    <td>Bogota</td>
+                                    <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime quidem fugiat dolore quaerat ea voluptates, repudiandae ratione hic, quis, molestias ipsam eveniet consectetur ex eius eaque nulla amet nesciunt natus.</td>
+                                </tr>
+                                <tr>
+                                    <td>España</td>
+                                    <td>Madrid</td>
+                                    <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae dolor sed perferendis saepe, consequatur quibusdam fugit nesciunt enim aperiam cum minima quam quis? Nobis voluptatem deleniti officiis earum ad voluptates.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h1 class="text-xl text-white bg-black rounded transition-colors hover:text-blue-500 my-4 px-4">Layout</h1>
+                    <div class="container mt-4">
+                        <p class="text-2xl">Para que el borde no reduzca el tamaño definido de los divs por ejemplo se le debe de poner box-content para que el borde se ponga sobre y no afecte los tamaños</p>
+                        <div class="bg-gray-300 w-64 h-32 p-8 border-8 border-gray-500 box-content  mb-4">
+                            <div class="bg-gray-500 w-full h-full">
+
+                            </div>
+                            
+                        </div>
+                        <div class="bg-blue-200">
+                            <div class="bg-gray-400 text-gray-700 text-center px-4 py-2 inline-block">1</div>
+                            <div class="bg-gray-400 text-gray-700 text-center px-4 py-2 my-2 inline-block">2</div>
+                            <div class="bg-gray-400 text-gray-700 text-center px-4 py-2 inline-block">3</div>
+                        </div>
+                        <p class="text-2xl">Para ayudarme a poscionar las imagenes entre texto por ejemplo aqui puedo ayudarme del float</p>
+                        <a class="text-blue-500 underline block"  href="https://tailwindcss.com/docs/float" target="_blank" rel="noopener noreferrer">Float</a>
+                        <div class="my-6">
+                            <img class="float-right w-64"  src="https://cdn.pixabay.com/photo/2023/09/21/06/27/turnip-8266093_1280.jpg" alt="">
+                            <img class=" float-left w-52" src="https://cdn.pixabay.com/photo/2024/02/10/15/03/graphic-8564947_1280.png" alt="">
+                            <p class="mb-2 clear-both">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti dolorem ad voluptate, nulla hic suscipit accusantium? Laborum aperiam facere ducimus saepe! Non dolore quae ipsa hic odio quibusdam sapiente doloremque.</p>
+                            <p class="mb-2">Officia aliquam provident iure quaerat, quasi sapiente laudantium debitis porro, expedita error beatae a, quisquam quos itaque harum. Impedit quaerat corrupti corporis fuga animi fugiat ad aperiam expedita. Optio, sint.</p>
+                            <p class="mb-2">Quasi nisi at fugiat ducimus commodi qui obcaecati corporis explicabo! Dolor esse perspiciatis facilis voluptatibus numquam dolore sed sequi voluptates? Asperiores et voluptates id ipsa unde quaerat libero doloribus consequatur.</p>
+                            <p class="mb-2">Iusto, rerum. Obcaecati sequi laborum ducimus, suscipit saepe sapiente voluptate cumque soluta laudantium animi alias numquam reprehenderit, nisi dolorum optio eveniet tenetur, neque provident rerum consectetur! Sed suscipit quibusdam sapiente!</p>
+                            <p class="mb-2">Sequi reiciendis rem saepe natus repellat unde hic enim consequuntur eius, rerum officiis magnam aspernatur pariatur vitae atque reprehenderit, iure cupiditate et. Veritatis eaque labore optio quibusdam, magni vel beatae.</p>
+                        </div>
+
+                        <p class=" text-2xl border-t-4 border-black">Para redimensionar las imagenes por ejemplo puedo usar object</p>
+                        <a class="text-blue-500 underline block"  href="https://tailwindcss.com/docs/object-fit" target="_blank" rel="noopener noreferrer">Object Fit</a>
+                        <div class="bg-gray-300">
+                           <img class="w-full h-64  object-contain" src="https://media.istockphoto.com/id/1486564860/es/foto/mano-del-humano-sosteniendo-tierra-verde-con-%C3%A1rbol-para-esg-co2-y-cero-neto-concepto-de-medio.jpg?s=2048x2048&w=is&k=20&c=fAicSsrNRLj5To9mDkoIrNXvGmgYzGtD0Pen7ezCsU8=" alt="">
+                        </div>
+                        <div class="bg-gray-300">
+                            <img class="w-full h-64  object-cover object-botton" src="https://cdn.pixabay.com/photo/2023/10/26/04/53/car-8341712_1280.jpg" alt="">
+                         </div>
+                         <div class="mt-6">
+                            <p class="text-2xl">Podemos usar el overflow para  si recortar contenido, dibujar barras de desplazamiento o mostrar el contenido excedente en un elemento a nivel de bloque. </p>
+                            <a class="text-blue-500 underline block" href="https://tailwindcss.com/docs/text-overflow" target="_blank" rel="noopener noreferrer">Overflow</a>
+                            <div class="bg-gray-300 p-4 h-64 overflow-auto">
+                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Mollitia veniam nesciunt optio rem dolorum ad sapiente aperiam, hic quia dicta itaque officiis dolor unde libero recusandae, impedit id, nihil a.</p>
+                                <p>Quisquam, dignissimos voluptatibus! Fugiat quam itaque quaerat, qui sequi commodi veniam soluta temporibus laudantium vitae sapiente id eos rerum molestias earum repellat sint quae ab nihil nam labore ipsam quo!</p>
+                                <p>Error sequi autem perferendis voluptates voluptatibus quis tempora facere natus doloremque, sapiente eaque possimus provident, ipsa in culpa quas iusto assumenda vero nihil quibusdam sed aspernatur repudiandae iure. Recusandae, fuga.</p>
+                                <p>Quos debitis mollitia hic cupiditate atque animi suscipit, explicabo totam itaque temporibus tempore? Ratione beatae laborum quis eligendi autem necessitatibus deleniti rerum, voluptatem quasi iure facilis cum, magnam tempore optio!</p>
+                                <p>Nulla similique at in et, quis ullam ipsum eum aperiam veritatis, repellat magnam dolore blanditiis consequatur dignissimos? Cupiditate reprehenderit, quo aliquid quisquam, ipsam deserunt deleniti doloremque minima eum dolorem vel.</p>
+                                <p>Esse assumenda iste est perspiciatis voluptas. Velit fugit deserunt voluptatem facere magni ullam modi, magnam aut optio excepturi suscipit pariatur ipsa repellat vitae! Nesciunt quam aperiam qui, sequi et laboriosam.</p>
+                                <p>Quod repellendus aut blanditiis impedit neque ex tempora officiis ad quos labore! Necessitatibus laudantium mollitia, odit saepe obcaecati laboriosam quis nemo enim earum iure similique amet cum, nobis unde cumque.</p>
+                                <p>Molestias nemo perferendis et obcaecati mollitia voluptate iure optio quibusdam fuga, iusto deleniti impedit nihil enim. Commodi, temporibus amet laboriosam exercitationem iusto dolore ab cumque error facere sed voluptatibus reiciendis.</p>
+                            </div>
+                         </div>
+                         <div class="mt-6">
+                            <h1 class=" text-4xl">Recuerda la posición es muy importante!!!</h1>
+                            <p>Sirve para posicionar los divs por ejemplo y poner uno encima de otro o enmedio de dos div!!!</p>
+                            <a class="text-blue-500 underline block" href="https://tailwindcss.com/docs/position" target="_blank" rel="noopener noreferrer"></a>
+                            <div class="bg-gray-200 p-4 relative">
+                                <div class="bg-gray-400 p-4 ">
+                                    <div class="bg-blue-400 p-4"></div>
+                                    <div class="bg-blue-600 p-4 absolute inset-x-0 botton-0"></div>
+                                </div>
+                            </div>
+
+                           
+                         </div>
+
+                         <div class="mt-6">
+                            <h1 class="bg-gray-300 text-gray-700 font-bold sticky top-0">Titulo 1</h1>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur illum officia ipsa veritatis quos impedit reiciendis temporibus. Velit eveniet et explicabo nulla eos adipisci nesciunt nobis magni reiciendis perspiciatis. Amet.</p>
+                            <p>Sequi fugiat dolorem voluptas labore eum commodi asperiores facere, incidunt minus soluta aliquid cumque sint sapiente nam corporis magni voluptates iusto temporibus nobis esse exercitationem maiores nulla maxime. Ducimus, accusantium.</p>
+                            <p>Repudiandae, in magni qui sapiente enim aliquam dolore obcaecati fugiat? Neque, aliquam commodi fugiat modi sint labore facere nisi maxime quas quo blanditiis repellat dignissimos maiores alias exercitationem laudantium? Delectus.</p>
+                            <p>Molestiae voluptatum accusantium laudantium. Sint, culpa quas fuga consequuntur at maxime, eius saepe soluta veniam obcaecati aut magni animi modi natus debitis quibusdam voluptatibus? Dolorem commodi sint magnam iusto dolor?</p>
+                            <h1 class="bg-gray-300 text-gray-700 font-bold sticky top-0">Titulo 2</h1>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur illum officia ipsa veritatis quos impedit reiciendis temporibus. Velit eveniet et explicabo nulla eos adipisci nesciunt nobis magni reiciendis perspiciatis. Amet.</p>
+                            <p>Sequi fugiat dolorem voluptas labore eum commodi asperiores facere, incidunt minus soluta aliquid cumque sint sapiente nam corporis magni voluptates iusto temporibus nobis esse exercitationem maiores nulla maxime. Ducimus, accusantium.</p>
+                            <p>Repudiandae, in magni qui sapiente enim aliquam dolore obcaecati fugiat? Neque, aliquam commodi fugiat modi sint labore facere nisi maxime quas quo blanditiis repellat dignissimos maiores alias exercitationem laudantium? Delectus.</p>
+                            <p>Molestiae voluptatum accusantium laudantium. Sint, culpa quas fuga consequuntur at maxime, eius saepe soluta veniam obcaecati aut magni animi modi natus debitis quibusdam voluptatibus? Dolorem commodi sint magnam iusto dolor?</p>
+                            <h1 class="bg-gray-300 text-gray-700 font-bold sticky top-0">Titulo 3</h1>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur illum officia ipsa veritatis quos impedit reiciendis temporibus. Velit eveniet et explicabo nulla eos adipisci nesciunt nobis magni reiciendis perspiciatis. Amet.</p>
+                            <p>Sequi fugiat dolorem voluptas labore eum commodi asperiores facere, incidunt minus soluta aliquid cumque sint sapiente nam corporis magni voluptates iusto temporibus nobis esse exercitationem maiores nulla maxime. Ducimus, accusantium.</p>
+                            <p>Repudiandae, in magni qui sapiente enim aliquam dolore obcaecati fugiat? Neque, aliquam commodi fugiat modi sint labore facere nisi maxime quas quo blanditiis repellat dignissimos maiores alias exercitationem laudantium? Delectus.</p>
+                            <p>Molestiae voluptatum accusantium laudantium. Sint, culpa quas fuga consequuntur at maxime, eius saepe soluta veniam obcaecati aut magni animi modi natus debitis quibusdam voluptatibus? Dolorem commodi sint magnam iusto dolor?</p>
+                        
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+
+                    <h1 class="text-xl text-white bg-black rounded transition-colors hover:text-blue-500 my-4 px-4">Sizes</h1>
+                    <a class="text-blue-500 underline block" href="https://tailwindcss.com/docs/width" target="_blank" rel="noopener noreferrer">Sizes</a>
+
+                    <div class="container">
+                        <div class="bg-blue-600 h-64">
+                            <div class="bg-red-600 h-full w-64 hover:w-full transition-all">
+                            </div>
+                            <p>Para que ocupe la mayor parte de la pantalla podemos ayudarnos con w-screen o h-screen</p>
+                            <p>Ayuda para un navbar</p>
+                            <div class="bg-green-600 h-32 w-screen">
+
+                            </div>
+                            <p>ayuda para un sidebar</p>
+                            <div class="mt-6 bg-black w-64 h-screen">
+                            </div> 
+                        </div>
+                    </div>
+                   
+    </div>
+</div>
