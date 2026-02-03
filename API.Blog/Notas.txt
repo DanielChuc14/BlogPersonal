@@ -1,0 +1,4 @@
+Para Generar la migración y migrar
+
+dotnet ef migrations add InitialCreate -p API.Blog.Data -s API.Blog.API
+dotnet ef database update -p API.Blog.Data -s API.Blog.API
