@@ -81,6 +81,52 @@ namespace API.Blog.API.Controllers
                  Errors = new List<string> { "El usuario no puede ser registrado"}
              });*/
         }
+        [HttpPost("ForgotPassword")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordRequest request)
+        {
+            if (!ModelState.IsValid) return BadRequest();
+
+            var user = await _userManager.FindByEmailAsync(request.Email);
+            if (user == null)
+            {
+                // Do not reveal whether the user exists
+                return Ok(new { Message = "Si el correo está registrado, recibirás las instrucciones para restablecer tu contraseña." });
+            }
+
+            var resetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
+
+            // In production: send resetToken via email service
+            // For now, return it in the response (development only)
+            return Ok(new { Message = "Token de recuperación generado.", Token = resetToken, Email = user.Email });
+        }
+
+        [HttpPost("ResetPassword")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordRequest request)
+        {
+            if (!ModelState.IsValid) return BadRequest();
+
+            var user = await _userManager.FindByEmailAsync(request.Email);
+            if (user == null)
+            {
+                return BadRequest(new AuthResult { Result = false, Errors = new List<string> { "Usuario no encontrado." } });
+            }
+
+            var result = await _userManager.ResetPasswordAsync(user, request.Token, request.NewPassword);
+            if (result.Succeeded)
+            {
+                return Ok(new AuthResult { Result = true });
+            }
+
+            var errors = new List<string>();
+            foreach (var err in result.Errors)
+            {
+                errors.Add(err.Description);
+            }
+            return BadRequest(new AuthResult { Result = false, Errors = errors });
+        }
+
         [HttpPost("Login")]
         public async Task<IActionResult> Login([FromBody] UserLoginRequest userDto)
         {

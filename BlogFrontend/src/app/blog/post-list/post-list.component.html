@@ -1,0 +1,12 @@
+<app-loader [visible]="loading"></app-loader>
+<div *ngIf="!loading">
+  <mat-list>
+    <mat-list-item *ngFor="let post of posts">
+      <span matListItemTitle>{{ post.title }}</span>
+      <span matListItemLine>{{ post.createdAt | date:'mediumDate' }}</span>
+      <a mat-icon-button matListItemMeta [routerLink]="['/post', post.id]">
+        <mat-icon>arrow_forward</mat-icon>
+      </a>
+    </mat-list-item>
+  </mat-list>
+</div>

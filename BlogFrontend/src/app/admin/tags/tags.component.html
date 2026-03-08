@@ -1,0 +1,55 @@
+<div class="admin-page">
+  <div class="page-header">
+    <h2>Tags</h2>
+    <button mat-raised-button color="primary" (click)="newTag()">
+      <mat-icon>add</mat-icon> New Tag
+    </button>
+  </div>
+
+  @if (loading) {
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  }
+
+  <mat-card>
+    <div class="table-container">
+      <table mat-table [dataSource]="tags" class="full-width">
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Name</th>
+          <td mat-cell *matCellDef="let t" class="cell-title">
+            <span class="tag-chip">
+              <mat-icon>label</mat-icon> {{ t.name }}
+            </span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef>Description</th>
+          <td mat-cell *matCellDef="let t" class="cell-desc">{{ t.description || '—' }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef class="col-actions">Actions</th>
+          <td mat-cell *matCellDef="let t" class="col-actions">
+            <button mat-icon-button color="primary" (click)="editTag(t.id)" matTooltip="Edit">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="deleteTag(t.id)" matTooltip="Delete">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="table-row"></tr>
+      </table>
+    </div>
+
+    @if (!loading && tags.length === 0) {
+      <div class="no-data">
+        <mat-icon>label</mat-icon>
+        <p>No tags yet.</p>
+      </div>
+    }
+  </mat-card>
+</div>

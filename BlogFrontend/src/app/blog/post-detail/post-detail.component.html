@@ -1,0 +1,25 @@
+<app-loader [visible]="loading"></app-loader>
+
+<div class="post-detail" *ngIf="!loading">
+  <div *ngIf="notFound" class="post-detail__not-found">
+    <mat-icon>error_outline</mat-icon>
+    <h2>Post not found</h2>
+    <a mat-button routerLink="/">Back to Home</a>
+  </div>
+
+  <mat-card *ngIf="post" class="post-detail__card">
+    <mat-card-header>
+      <mat-card-title>{{ post.title }}</mat-card-title>
+      <mat-card-subtitle *ngIf="post.createdAt">{{ post.createdAt | date:'longDate' }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content class="post-detail__body">
+      <p>{{ post.content }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <a mat-button routerLink="/">
+        <mat-icon>arrow_back</mat-icon> Back
+      </a>
+    </mat-card-actions>
+  </mat-card>
+</div>

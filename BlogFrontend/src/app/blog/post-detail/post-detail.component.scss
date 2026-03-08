@@ -1,0 +1,21 @@
+.post-detail {
+  max-width: 800px;
+  margin: 0 auto;
+
+  &__not-found {
+    text-align: center;
+    padding: 3rem;
+    color: #888;
+    mat-icon { font-size: 3rem; height: 3rem; width: 3rem; display: block; margin: 0 auto 1rem; }
+  }
+
+  &__card {
+    mat-card-header { margin-bottom: 1rem; }
+  }
+
+  &__body {
+    padding: 1.5rem 0;
+    line-height: 1.8;
+    font-size: 1.05rem;
+  }
+}

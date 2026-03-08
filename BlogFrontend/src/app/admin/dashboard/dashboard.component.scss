@@ -1,0 +1,102 @@
+.dashboard {
+  &__heading {
+    margin-bottom: 2rem;
+
+    h2 {
+      margin: 0 0 0.25rem;
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #1a1a2e;
+    }
+
+    p { margin: 0; color: #5f6368; font-size: 0.95rem; }
+  }
+
+  &__stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 2.5rem;
+  }
+
+  &__section {
+    h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #1a1a2e;
+      margin: 0 0 1rem;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+
+    a { border-radius: 8px !important; }
+  }
+}
+
+/* ─── Stat cards ─── */
+.stat-card {
+  border-radius: 12px !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07) !important;
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 24px rgba(0,0,0,0.12) !important;
+  }
+
+  mat-card-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem !important;
+  }
+
+  &__icon {
+    border-radius: 12px;
+    padding: 0.75rem;
+    flex-shrink: 0;
+
+    mat-icon { font-size: 1.75rem; height: 1.75rem; width: 1.75rem; display: block; }
+  }
+
+  &__value {
+    font-size: 2.25rem;
+    font-weight: 800;
+    line-height: 1;
+    display: block;
+    color: #1a1a2e;
+  }
+
+  &__label {
+    font-size: 0.8rem;
+    color: #5f6368;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 0.2rem;
+    display: block;
+  }
+
+  &--blue .stat-card__icon {
+    background: #e3f2fd;
+    mat-icon { color: #1565c0; }
+  }
+
+  &--green .stat-card__icon {
+    background: #e8f5e9;
+    mat-icon { color: #2e7d32; }
+  }
+
+  &--purple .stat-card__icon {
+    background: #f3e5f5;
+    mat-icon { color: #7b1fa2; }
+  }
+
+  &--orange .stat-card__icon {
+    background: #fff3e0;
+    mat-icon { color: #e65100; }
+  }
+}

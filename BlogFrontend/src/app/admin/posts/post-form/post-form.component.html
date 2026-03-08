@@ -1,0 +1,85 @@
+<div class="admin-page">
+  <div class="page-header">
+    <h2>{{ isEdit ? 'Edit Post' : 'New Post' }}</h2>
+    <button mat-stroked-button type="button" (click)="cancel()">
+      <mat-icon>arrow_back</mat-icon> Back
+    </button>
+  </div>
+
+  @if (loading) {
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  }
+
+  @if (!loading) {
+    <mat-card class="form-card">
+      <mat-card-content>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Title</mat-label>
+            <input matInput formControlName="title" placeholder="Enter post title" />
+            <mat-icon matSuffix>title</mat-icon>
+            <mat-error>
+              @if (form.get('title')?.hasError('required')) { Title is required }
+              @else if (form.get('title')?.hasError('minlength')) { Minimum 3 characters }
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Excerpt</mat-label>
+            <textarea matInput formControlName="extract" rows="2" placeholder="Short summary of the post..."></textarea>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Content</mat-label>
+            <textarea matInput formControlName="content" rows="10" placeholder="Write your post content here..."></textarea>
+            <mat-error>
+              @if (form.get('content')?.hasError('required')) { Content is required }
+              @else if (form.get('content')?.hasError('minlength')) { Minimum 10 characters }
+            </mat-error>
+          </mat-form-field>
+
+          <div class="form-row">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Status</mat-label>
+              <mat-select formControlName="status">
+                <mat-option [value]="0">
+                  <mat-icon>edit_note</mat-icon> Draft
+                </mat-option>
+                <mat-option [value]="1">
+                  <mat-icon>public</mat-icon> Published
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Categories</mat-label>
+              <mat-select formControlName="categoryIds" multiple>
+                @for (cat of categories; track cat.id) {
+                  <mat-option [value]="cat.id">{{ cat.name }}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Tags</mat-label>
+            <mat-select formControlName="tagIds" multiple>
+              @for (tag of tags; track tag.id) {
+                <mat-option [value]="tag.id">{{ tag.name }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+
+          <div class="form-actions">
+            <button mat-button type="button" (click)="cancel()">Cancel</button>
+            <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid || saving">
+              @if (saving) { <mat-spinner diameter="20"></mat-spinner> }
+              @else { {{ isEdit ? 'Save Changes' : 'Create Post' }} }
+            </button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  }
+</div>

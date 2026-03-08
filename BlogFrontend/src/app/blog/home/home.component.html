@@ -1,0 +1,52 @@
+<div class="home">
+  <!-- Hero section -->
+  <div class="home__hero">
+    <div class="home__hero-content">
+      <h1>Welcome to <span class="accent">MyBlog</span></h1>
+      <p>Discover stories, ideas, and perspectives from our community of writers.</p>
+    </div>
+  </div>
+
+  <!-- Posts section -->
+  <div class="home__section">
+    <div class="home__section-header">
+      <h2>Latest Posts</h2>
+    </div>
+
+    <app-loader [visible]="loading"></app-loader>
+
+    @if (!loading) {
+      @if (posts.length > 0) {
+        <div class="home__grid">
+          @for (post of posts; track post.id) {
+            <mat-card class="post-card">
+              <mat-card-header>
+                <mat-card-title class="post-card__title">{{ post.title }}</mat-card-title>
+                @if (post.createdAt) {
+                  <mat-card-subtitle class="post-card__date">
+                    <mat-icon>calendar_today</mat-icon>
+                    {{ post.createdAt | date:'mediumDate' }}
+                  </mat-card-subtitle>
+                }
+              </mat-card-header>
+              <mat-card-content class="post-card__content">
+                <p>{{ (post.extract || post.content || '') | slice:0:180 }}{{ ((post.extract || post.content || '').length > 180) ? '...' : '' }}</p>
+              </mat-card-content>
+              <mat-card-actions class="post-card__actions">
+                <a mat-raised-button color="primary" [routerLink]="['/post', post.id]">
+                  Read More <mat-icon>arrow_forward</mat-icon>
+                </a>
+              </mat-card-actions>
+            </mat-card>
+          }
+        </div>
+      } @else {
+        <div class="home__empty">
+          <mat-icon>article</mat-icon>
+          <h3>No posts yet</h3>
+          <p>Check back later for new content.</p>
+        </div>
+      }
+    }
+  </div>
+</div>

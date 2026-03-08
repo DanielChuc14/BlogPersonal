@@ -1,0 +1,54 @@
+<mat-toolbar class="navbar">
+  <a class="navbar__brand" routerLink="/">
+    <mat-icon class="brand-icon">book</mat-icon>
+    <span>MyBlog</span>
+  </a>
+
+  <span class="spacer"></span>
+
+  <!-- Desktop links -->
+  <div class="navbar__desktop-links">
+    <a mat-button routerLink="/" routerLinkActive="nav-active" [routerLinkActiveOptions]="{ exact: true }">
+      <mat-icon>home</mat-icon> Home
+    </a>
+    @if (authService.isLoggedIn()) {
+      <a mat-button routerLink="/admin">
+        <mat-icon>admin_panel_settings</mat-icon> Admin
+      </a>
+      <button mat-stroked-button class="logout-btn" (click)="logout()">
+        <mat-icon>logout</mat-icon> Logout
+      </button>
+    } @else {
+      <a mat-raised-button class="login-btn" routerLink="/login">
+        <mat-icon>login</mat-icon> Login
+      </a>
+    }
+  </div>
+
+  <!-- Mobile hamburger -->
+  <button mat-icon-button class="navbar__menu-btn" [matMenuTriggerFor]="mobileMenu" aria-label="Menu">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <mat-menu #mobileMenu="matMenu">
+    <a mat-menu-item routerLink="/">
+      <mat-icon>home</mat-icon>
+      <span>Home</span>
+    </a>
+    @if (authService.isLoggedIn()) {
+      <a mat-menu-item routerLink="/admin">
+        <mat-icon>admin_panel_settings</mat-icon>
+        <span>Admin</span>
+      </a>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+      </button>
+    } @else {
+      <a mat-menu-item routerLink="/login">
+        <mat-icon>login</mat-icon>
+        <span>Login</span>
+      </a>
+    }
+  </mat-menu>
+</mat-toolbar>

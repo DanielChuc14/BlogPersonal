@@ -1,0 +1,56 @@
+<mat-sidenav-container class="admin-container">
+  <mat-sidenav #sidenav mode="side" opened class="admin-sidenav">
+    <div class="sidenav__header">
+      <mat-icon class="sidenav__logo">book</mat-icon>
+      <div>
+        <div class="sidenav__title">MyBlog</div>
+        <div class="sidenav__subtitle">Admin Panel</div>
+      </div>
+    </div>
+
+    <mat-nav-list class="sidenav__nav">
+      <a mat-list-item routerLink="/admin/dashboard" routerLinkActive="active" (click)="closeSidenavOnMobile()">
+        <mat-icon matListItemIcon>dashboard</mat-icon>
+        <span style="color: white;" matListItemTitle>Dashboard</span>
+      </a>
+      <a mat-list-item routerLink="/admin/posts" routerLinkActive="active" (click)="closeSidenavOnMobile()">
+        <mat-icon matListItemIcon>article</mat-icon>
+        <span style="color: white;" matListItemTitle>Posts</span>
+      </a>
+      <a mat-list-item routerLink="/admin/categories" routerLinkActive="active" (click)="closeSidenavOnMobile()">
+        <mat-icon matListItemIcon>category</mat-icon>
+        <span style="color: white;" matListItemTitle>Categories</span>
+      </a>
+      <a mat-list-item routerLink="/admin/tags" routerLinkActive="active" (click)="closeSidenavOnMobile()">
+        <mat-icon matListItemIcon>label</mat-icon>
+        <span style="color: white;" matListItemTitle>Tags</span>
+      </a>
+      <a mat-list-item routerLink="/admin/users" routerLinkActive="active" (click)="closeSidenavOnMobile()">
+        <mat-icon matListItemIcon>people</mat-icon>
+        <span style="color: white;" matListItemTitle>Users</span>
+      </a>
+    </mat-nav-list>
+
+    <div class="sidenav__footer">
+      <button mat-stroked-button class="logout-btn" (click)="logout()">
+        <mat-icon>logout</mat-icon> Logout
+      </button>
+    </div>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="admin-content">
+    <mat-toolbar class="admin-toolbar">
+      <button mat-icon-button class="menu-toggle" (click)="sidenav.toggle()" aria-label="Toggle menu">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span class="toolbar-title">Blog Administration</span>
+      <span class="spacer"></span>
+      <span class="toolbar-user">
+        <mat-icon>account_circle</mat-icon>
+      </span>
+    </mat-toolbar>
+    <div class="admin-content__body">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

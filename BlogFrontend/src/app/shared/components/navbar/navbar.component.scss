@@ -1,0 +1,67 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%) !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.25) !important;
+  padding: 0 1.5rem;
+
+  .spacer { flex: 1 1 auto; }
+
+  &__brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #e94560;
+    text-decoration: none;
+
+    .brand-icon { color: #e94560; font-size: 1.6rem; height: 1.6rem; width: 1.6rem; }
+  }
+
+  &__desktop-links {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+
+    a[mat-button] {
+      color: rgba(255,255,255,0.85) !important;
+      font-weight: 500;
+      border-radius: 6px !important;
+      transition: background 0.2s;
+
+      &:hover, &.nav-active {
+        background: rgba(255,255,255,0.12) !important;
+        color: #fff !important;
+      }
+      &.nav-active { color: #e94560 !important; }
+    }
+
+    .logout-btn {
+      color: #e94560 !important;
+      border-color: #e94560 !important;
+      border-radius: 6px !important;
+      margin-left: 0.5rem;
+
+      &:hover { background: rgba(233,69,96,0.1) !important; }
+    }
+
+    .login-btn {
+      background: #e94560 !important;
+      color: #fff !important;
+      border-radius: 6px !important;
+      margin-left: 0.5rem;
+    }
+  }
+
+  &__menu-btn {
+    display: none !important;
+    color: white !important;
+  }
+
+  @media (max-width: 768px) {
+    &__desktop-links { display: none; }
+    &__menu-btn { display: inline-flex !important; }
+  }
+}

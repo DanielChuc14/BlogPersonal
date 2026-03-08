@@ -1,0 +1,52 @@
+<h2>{{ editingId ? 'Edit Post' : 'New Post' }}</h2>
+
+<mat-card class="editor-card">
+  <mat-card-content>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Title</mat-label>
+        <input matInput formControlName="title" placeholder="Post title">
+        <mat-error *ngIf="form.get('title')?.hasError('required')">Title is required</mat-error>
+        <mat-error *ngIf="form.get('title')?.hasError('minlength')">Minimum 3 characters</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Content</mat-label>
+        <textarea matInput formControlName="content" rows="8" placeholder="Write your post..."></textarea>
+        <mat-error *ngIf="form.get('content')?.hasError('required')">Content is required</mat-error>
+        <mat-error *ngIf="form.get('content')?.hasError('minlength')">Minimum 10 characters</mat-error>
+      </mat-form-field>
+
+      <div class="editor-card__actions">
+        <button mat-raised-button color="primary" type="submit" [disabled]="saving">
+          {{ editingId ? 'Update' : 'Create' }}
+        </button>
+        <button mat-button type="button" (click)="resetForm()" *ngIf="editingId">Cancel</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
+
+<h3>All Posts</h3>
+<app-loader [visible]="loading"></app-loader>
+<div *ngIf="!loading" class="table-container">
+  <table mat-table [dataSource]="posts" class="full-width">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>#</th>
+      <td mat-cell *matCellDef="let p">{{ p.id }}</td>
+    </ng-container>
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef>Title</th>
+      <td mat-cell *matCellDef="let p">{{ p.title }}</td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let p">
+        <button mat-icon-button color="primary" (click)="edit(p)"><mat-icon>edit</mat-icon></button>
+        <button mat-icon-button color="warn" (click)="delete(p.id)"><mat-icon>delete</mat-icon></button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

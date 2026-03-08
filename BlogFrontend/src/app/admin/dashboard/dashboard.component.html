@@ -1,0 +1,76 @@
+<div class="dashboard">
+  <div class="dashboard__heading">
+    <h2>Dashboard</h2>
+    <p>Welcome back! Here's an overview of your blog.</p>
+  </div>
+
+  <!-- Stats grid -->
+  <div class="dashboard__stats">
+    <mat-card class="stat-card stat-card--blue">
+      <mat-card-content>
+        <div class="stat-card__icon">
+          <mat-icon>article</mat-icon>
+        </div>
+        <div class="stat-card__info">
+          <span class="stat-card__value">{{ totalPosts }}</span>
+          <span class="stat-card__label">Total Posts</span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card stat-card--green">
+      <mat-card-content>
+        <div class="stat-card__icon">
+          <mat-icon>check_circle</mat-icon>
+        </div>
+        <div class="stat-card__info">
+          <span class="stat-card__value">{{ publishedPosts }}</span>
+          <span class="stat-card__label">Published</span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card stat-card--purple">
+      <mat-card-content>
+        <div class="stat-card__icon">
+          <mat-icon>category</mat-icon>
+        </div>
+        <div class="stat-card__info">
+          <span class="stat-card__value">{{ totalCategories }}</span>
+          <span class="stat-card__label">Categories</span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card stat-card--orange">
+      <mat-card-content>
+        <div class="stat-card__icon">
+          <mat-icon>label</mat-icon>
+        </div>
+        <div class="stat-card__info">
+          <span class="stat-card__value">{{ totalTags }}</span>
+          <span class="stat-card__label">Tags</span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Quick Actions -->
+  <div class="dashboard__section">
+    <h3>Quick Actions</h3>
+    <div class="dashboard__actions">
+      <a mat-raised-button color="primary" routerLink="/admin/posts/new">
+        <mat-icon>add</mat-icon> New Post
+      </a>
+      <a mat-stroked-button routerLink="/admin/posts">
+        <mat-icon>article</mat-icon> Manage Posts
+      </a>
+      <a mat-stroked-button routerLink="/admin/categories">
+        <mat-icon>category</mat-icon> Manage Categories
+      </a>
+      <a mat-stroked-button routerLink="/admin/tags">
+        <mat-icon>label</mat-icon> Manage Tags
+      </a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,127 @@
+.admin-container {
+  height: 100vh;
+}
+
+.admin-sidenav {
+  width: 256px;
+  display: flex;
+  flex-direction: column;
+  background: #1a1a2e;
+  color: white;
+  border-right: none !important;
+
+  .sidenav__header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.25rem 1rem 1.25rem 1.25rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .sidenav__logo {
+    font-size: 2rem;
+    height: 2rem;
+    width: 2rem;
+    color: #e94560;
+  }
+
+  .sidenav__title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #e94560;
+    line-height: 1.2;
+  }
+
+  .sidenav__subtitle {
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.45);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .sidenav__nav {
+    flex: 1;
+    padding: 0.5rem 0;
+
+    a[mat-list-item] {
+      color: rgba(255,255,255,0.72);
+      border-radius: 0 24px 24px 0;
+      margin: 2px 0.75rem 2px 0;
+      transition: background 0.2s, color 0.2s;
+
+      mat-icon { color: rgba(255,255,255,0.5); }
+
+      &:hover {
+        background: rgba(255,255,255,0.06);
+        color: white;
+        mat-icon { color: rgba(255,255,255,0.8); }
+      }
+
+      &.active {
+        background: rgba(233,69,96,0.18);
+        color: #fff;
+        font-weight: 600;
+        mat-icon { color: #e94560; }
+      }
+    }
+  }
+
+  .sidenav__footer {
+    padding: 1rem;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .logout-btn {
+    width: 100%;
+    color: #e94560 !important;
+    border-color: rgba(233,69,96,0.4) !important;
+    border-radius: 8px !important;
+    &:hover { background: rgba(233,69,96,0.1) !important; }
+  }
+}
+
+.admin-toolbar {
+  background: #ffffff !important;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  color: #1a1a2e !important;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+
+  .menu-toggle { color: #1a1a2e; }
+
+  .toolbar-title {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-left: 0.25rem;
+  }
+
+  .spacer { flex: 1 1 auto; }
+
+  .toolbar-user mat-icon {
+    color: #5f6368;
+    font-size: 2rem;
+    height: 2rem;
+    width: 2rem;
+  }
+}
+
+.admin-content {
+  display: flex;
+  flex-direction: column;
+  background: #f5f7fa;
+
+  &__body {
+    padding: 2rem;
+    flex: 1;
+
+    @media (max-width: 600px) { padding: 1rem; }
+  }
+}
+
+@media (max-width: 992px) {
+  .admin-sidenav {
+    position: fixed !important;
+  }
+}
