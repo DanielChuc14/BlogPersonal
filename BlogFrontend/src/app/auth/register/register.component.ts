@@ -23,6 +23,24 @@ export class RegisterComponent {
     });
   }
 
+  get passwordStrength(): number {
+    const pw: string = this.form.get('password')?.value ?? '';
+    if (!pw) return 0;
+    let score = 1;
+    if (pw.length >= 8) score++;
+    if (/[A-Z]/.test(pw) && /[0-9]/.test(pw)) score++;
+    if (/[^A-Za-z0-9]/.test(pw)) score++;
+    return score;
+  }
+
+  get passwordStrengthLabel(): string {
+    return ['', 'Weak', 'Fair', 'Good', 'Strong'][this.passwordStrength] ?? 'Strong';
+  }
+
+  get passwordStrengthColor(): string {
+    return ['', '#ef4444', '#f97316', '#22c55e', '#16a34a'][this.passwordStrength] ?? '#16a34a';
+  }
+
   onSubmit(): void {
     if (this.form.invalid) return;
     this.loading = true;

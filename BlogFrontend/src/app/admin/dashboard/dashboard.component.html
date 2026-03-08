@@ -1,74 +1,80 @@
-<div class="dashboard">
-  <div class="dashboard__heading">
-    <h2>Dashboard</h2>
-    <p>Welcome back! Here's an overview of your blog.</p>
+<div class="max-w-[1200px] mx-auto animate-fade-in">
+  <!-- Heading -->
+  <div class="mb-8">
+    <h2 class="text-[1.35rem] sm:text-[1.75rem] font-bold text-brand-dark mt-0 mb-1">Dashboard</h2>
+    <p class="m-0 text-[#5f6368] text-[0.95rem]">Welcome back! Here's an overview of your blog.</p>
   </div>
 
-  <!-- Stats grid -->
-  <div class="dashboard__stats">
-    <mat-card class="stat-card stat-card--blue">
-      <mat-card-content>
-        <div class="stat-card__icon">
-          <mat-icon>article</mat-icon>
+  <!-- Stats grid: 2 cols on mobile, auto-fill on sm+ -->
+  <div class="grid grid-cols-2 sm:[grid-template-columns:repeat(auto-fill,minmax(200px,1fr))] gap-4 sm:gap-5 mb-10">
+
+    <!-- Total Posts -->
+    <mat-card class="!rounded-xl ![box-shadow:0_2px_12px_rgba(0,0,0,0.07)] transition-all duration-200 hover:-translate-y-1 hover:![box-shadow:0_6px_24px_rgba(0,0,0,0.12)]">
+      <mat-card-content class="!flex !items-center !gap-3 sm:!gap-4 !p-4 sm:!p-6">
+        <div class="rounded-xl p-2.5 sm:p-3 shrink-0 bg-[#e3f2fd]">
+          <mat-icon class="![font-size:1.5rem] sm:![font-size:1.75rem] ![height:1.5rem] sm:![height:1.75rem] ![width:1.5rem] sm:![width:1.75rem] block text-[#1565c0]">article</mat-icon>
         </div>
-        <div class="stat-card__info">
-          <span class="stat-card__value">{{ totalPosts }}</span>
-          <span class="stat-card__label">Total Posts</span>
+        <div class="min-w-0">
+          <span class="block text-[1.75rem] sm:text-[2.25rem] font-extrabold leading-none text-brand-dark">{{ totalPosts }}</span>
+          <span class="block text-[0.7rem] sm:text-[0.8rem] text-[#5f6368] uppercase tracking-wide mt-1">Total Posts</span>
         </div>
       </mat-card-content>
     </mat-card>
 
-    <mat-card class="stat-card stat-card--green">
-      <mat-card-content>
-        <div class="stat-card__icon">
-          <mat-icon>check_circle</mat-icon>
+    <!-- Published -->
+    <mat-card class="!rounded-xl ![box-shadow:0_2px_12px_rgba(0,0,0,0.07)] transition-all duration-200 hover:-translate-y-1 hover:![box-shadow:0_6px_24px_rgba(0,0,0,0.12)]">
+      <mat-card-content class="!flex !items-center !gap-3 sm:!gap-4 !p-4 sm:!p-6">
+        <div class="rounded-xl p-2.5 sm:p-3 shrink-0 bg-[#e8f5e9]">
+          <mat-icon class="![font-size:1.5rem] sm:![font-size:1.75rem] ![height:1.5rem] sm:![height:1.75rem] ![width:1.5rem] sm:![width:1.75rem] block text-[#2e7d32]">check_circle</mat-icon>
         </div>
-        <div class="stat-card__info">
-          <span class="stat-card__value">{{ publishedPosts }}</span>
-          <span class="stat-card__label">Published</span>
-        </div>
-      </mat-card-content>
-    </mat-card>
-
-    <mat-card class="stat-card stat-card--purple">
-      <mat-card-content>
-        <div class="stat-card__icon">
-          <mat-icon>category</mat-icon>
-        </div>
-        <div class="stat-card__info">
-          <span class="stat-card__value">{{ totalCategories }}</span>
-          <span class="stat-card__label">Categories</span>
+        <div class="min-w-0">
+          <span class="block text-[1.75rem] sm:text-[2.25rem] font-extrabold leading-none text-brand-dark">{{ publishedPosts }}</span>
+          <span class="block text-[0.7rem] sm:text-[0.8rem] text-[#5f6368] uppercase tracking-wide mt-1">Published</span>
         </div>
       </mat-card-content>
     </mat-card>
 
-    <mat-card class="stat-card stat-card--orange">
-      <mat-card-content>
-        <div class="stat-card__icon">
-          <mat-icon>label</mat-icon>
+    <!-- Categories -->
+    <mat-card class="!rounded-xl ![box-shadow:0_2px_12px_rgba(0,0,0,0.07)] transition-all duration-200 hover:-translate-y-1 hover:![box-shadow:0_6px_24px_rgba(0,0,0,0.12)]">
+      <mat-card-content class="!flex !items-center !gap-3 sm:!gap-4 !p-4 sm:!p-6">
+        <div class="rounded-xl p-2.5 sm:p-3 shrink-0 bg-[#f3e5f5]">
+          <mat-icon class="![font-size:1.5rem] sm:![font-size:1.75rem] ![height:1.5rem] sm:![height:1.75rem] ![width:1.5rem] sm:![width:1.75rem] block text-[#7b1fa2]">category</mat-icon>
         </div>
-        <div class="stat-card__info">
-          <span class="stat-card__value">{{ totalTags }}</span>
-          <span class="stat-card__label">Tags</span>
+        <div class="min-w-0">
+          <span class="block text-[1.75rem] sm:text-[2.25rem] font-extrabold leading-none text-brand-dark">{{ totalCategories }}</span>
+          <span class="block text-[0.7rem] sm:text-[0.8rem] text-[#5f6368] uppercase tracking-wide mt-1">Categories</span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Tags -->
+    <mat-card class="!rounded-xl ![box-shadow:0_2px_12px_rgba(0,0,0,0.07)] transition-all duration-200 hover:-translate-y-1 hover:![box-shadow:0_6px_24px_rgba(0,0,0,0.12)]">
+      <mat-card-content class="!flex !items-center !gap-3 sm:!gap-4 !p-4 sm:!p-6">
+        <div class="rounded-xl p-2.5 sm:p-3 shrink-0 bg-[#fff3e0]">
+          <mat-icon class="![font-size:1.5rem] sm:![font-size:1.75rem] ![height:1.5rem] sm:![height:1.75rem] ![width:1.5rem] sm:![width:1.75rem] block text-[#e65100]">label</mat-icon>
+        </div>
+        <div class="min-w-0">
+          <span class="block text-[1.75rem] sm:text-[2.25rem] font-extrabold leading-none text-brand-dark">{{ totalTags }}</span>
+          <span class="block text-[0.7rem] sm:text-[0.8rem] text-[#5f6368] uppercase tracking-wide mt-1">Tags</span>
         </div>
       </mat-card-content>
     </mat-card>
   </div>
 
   <!-- Quick Actions -->
-  <div class="dashboard__section">
-    <h3>Quick Actions</h3>
-    <div class="dashboard__actions">
-      <a mat-raised-button color="primary" routerLink="/admin/posts/new">
+  <div>
+    <h3 class="text-[1.05rem] sm:text-[1.1rem] font-semibold text-brand-dark mt-0 mb-4">Quick Actions</h3>
+    <div class="flex flex-wrap gap-3">
+      <a mat-raised-button color="primary" class="!rounded-lg" routerLink="/admin/posts/new">
         <mat-icon>add</mat-icon> New Post
       </a>
-      <a mat-stroked-button routerLink="/admin/posts">
+      <a mat-stroked-button class="!rounded-lg" routerLink="/admin/posts">
         <mat-icon>article</mat-icon> Manage Posts
       </a>
-      <a mat-stroked-button routerLink="/admin/categories">
+      <a mat-stroked-button class="!rounded-lg" routerLink="/admin/categories">
         <mat-icon>category</mat-icon> Manage Categories
       </a>
-      <a mat-stroked-button routerLink="/admin/tags">
+      <a mat-stroked-button class="!rounded-lg" routerLink="/admin/tags">
         <mat-icon>label</mat-icon> Manage Tags
       </a>
     </div>

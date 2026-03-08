@@ -1,160 +1,37 @@
-/* Same split-panel layout as login */
-.auth-page {
-  display: flex;
-  min-height: 100vh;
-}
-
+/* Brand panel gradient */
 .auth-brand {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background: linear-gradient(145deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-  padding: 3rem;
-  position: relative;
-  overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    width: 300px; height: 300px;
-    border-radius: 50%;
-    background: rgba(233,69,96,0.08);
-    top: -80px; right: -80px;
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    width: 200px; height: 200px;
-    border-radius: 50%;
-    background: rgba(233,69,96,0.05);
-    bottom: -60px; left: -60px;
-  }
-
-  &__content {
-    text-align: center;
-    color: white;
-    position: relative;
-    z-index: 1;
-  }
-
-  &__logo {
-    font-size: 5rem !important;
-    height: 5rem !important;
-    width: 5rem !important;
-    color: #e94560;
-    margin-bottom: 1.5rem;
-    filter: drop-shadow(0 4px 12px rgba(233,69,96,0.4));
-  }
-
-  h1 {
-    font-size: 2.75rem;
-    font-weight: 800;
-    color: #e94560;
-    margin: 0 0 1rem;
-  }
-
-  p {
-    font-size: 1.05rem;
-    color: rgba(255,255,255,0.65);
-    line-height: 1.7;
-    max-width: 280px;
-    margin: 0 auto 2rem;
-  }
-
-  &__dots {
-    display: flex;
-    gap: 0.75rem;
-    justify-content: center;
-
-    span {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: rgba(233,69,96,0.5);
-      &:first-child { background: #e94560; }
-    }
-  }
-
-  @media (max-width: 768px) { display: none; }
 }
 
-.auth-form-panel {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-  background: #f5f7fa;
-
-  @media (max-width: 768px) {
-    min-height: 100vh;
-    padding: 1.5rem;
-  }
+/* Brand logo icon — inside a badge container */
+.auth-brand__logo {
+  font-size: 2.75rem !important;
+  height: 2.75rem !important;
+  width: 2.75rem !important;
+  color: #e94560;
+  filter: drop-shadow(0 4px 12px rgba(233, 69, 96, 0.4));
 }
 
-.auth-form-wrapper {
-  width: 100%;
-  max-width: 420px;
+/* Form header icon — inside a rounded badge */
+.auth-header__icon {
+  font-size: 1.5rem !important;
+  height: 1.5rem !important;
+  width: 1.5rem !important;
+  color: #1565c0;
 }
 
-.auth-header {
-  text-align: center;
-  margin-bottom: 2rem;
+/* Submit button gradient override */
+.auth-submit-btn {
+  background: linear-gradient(135deg, #1565c0 0%, #1976d2 100%) !important;
+  box-shadow: 0 4px 14px rgba(21, 101, 192, 0.3) !important;
+  transition: box-shadow 0.2s ease, transform 0.15s ease !important;
 
-  &__icon {
-    font-size: 2.5rem !important;
-    height: 2.5rem !important;
-    width: 2.5rem !important;
-    color: #1565c0;
-    margin-bottom: 0.75rem;
+  &:hover:not([disabled]) {
+    box-shadow: 0 6px 20px rgba(21, 101, 192, 0.45) !important;
+    transform: translateY(-1px);
   }
 
-  h2 {
-    font-size: 1.75rem;
-    font-weight: 700;
-    color: #1a1a2e;
-    margin: 0 0 0.25rem;
+  &[disabled] {
+    opacity: 0.65 !important;
   }
-
-  p { color: #5f6368; margin: 0; font-size: 0.95rem; }
-}
-
-.full-width { width: 100%; }
-
-.form-error-banner {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.5rem;
-  background: #fdecea;
-  border: 1px solid #f5c6cb;
-  border-radius: 6px;
-  padding: 0.75rem 1rem;
-  color: #c62828;
-  font-size: 0.875rem;
-  margin-bottom: 1rem;
-
-  mat-icon { font-size: 1.1rem; height: 1.1rem; width: 1.1rem; flex-shrink: 0; margin-top: 1px; }
-}
-
-.submit-btn {
-  height: 48px;
-  font-size: 1rem;
-  font-weight: 600;
-  border-radius: 8px !important;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
-}
-
-.auth-footer {
-  text-align: center;
-  margin-top: 1.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid rgba(0,0,0,0.08);
-
-  p { color: #5f6368; font-size: 0.9rem; margin: 0; }
-  a { color: #1565c0; font-weight: 600; &:hover { text-decoration: underline; } }
 }

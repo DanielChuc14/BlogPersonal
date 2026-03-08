@@ -1,77 +1,147 @@
-<div class="auth-page">
-  <!-- Brand panel (desktop only) -->
-  <div class="auth-brand">
-    <div class="auth-brand__content">
-      <mat-icon class="auth-brand__logo">book</mat-icon>
-      <h1>MyBlog</h1>
-      <p>Join our community and start sharing your story today.</p>
-      <div class="auth-brand__dots">
-        <span></span><span></span><span></span>
+<div class="flex min-h-screen">
+  <div class="auth-brand hidden md:flex flex-col flex-1 items-center justify-center relative overflow-hidden p-12">
+    <div class="absolute inset-0 pointer-events-none" style="background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0); background-size: 28px 28px;"></div>
+    <div class="absolute w-[520px] h-[520px] rounded-full bg-brand-accent/[.05] -top-44 -right-44 pointer-events-none"></div>
+    <div class="absolute w-[320px] h-[320px] rounded-full bg-white/[.02] -bottom-28 -left-28 pointer-events-none"></div>
+    <div class="absolute w-[200px] h-[200px] rounded-full bg-brand-accent/[.04] top-1/3 -left-20 pointer-events-none"></div>
+
+    <div class="relative z-10 max-w-[340px] text-white">
+      <div class="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-brand-accent/[.12] ring-1 ring-brand-accent/[.25] mb-8 shadow-lg">
+        <mat-icon class="auth-brand__logo">book</mat-icon>
+      </div>
+      <h1 class="text-[2.5rem] font-extrabold text-white mt-0 mb-3 leading-tight tracking-tight">MyBlog</h1>
+      <p class="text-[1rem] text-white/55 leading-[1.8] mt-0 mb-8">Join our community and start sharing your story today.</p>
+      <div class="w-10 h-0.5 bg-brand-accent/50 rounded-full mb-8"></div>
+      <div class="flex flex-col gap-5">
+        <div class="flex items-center gap-3.5">
+          <div class="w-9 h-9 rounded-lg bg-brand-accent/[.15] flex items-center justify-center shrink-0 ring-1 ring-white/[.06]">
+            <mat-icon class="!text-[1.1rem] !h-[1.1rem] !w-[1.1rem] text-brand-accent">edit_note</mat-icon>
+          </div>
+          <div>
+            <p class="font-semibold text-[0.875rem] m-0">Write &amp; Publish</p>
+            <p class="text-white/45 text-xs m-0 mt-0.5">Share ideas with the world</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-3.5">
+          <div class="w-9 h-9 rounded-lg bg-brand-accent/[.15] flex items-center justify-center shrink-0 ring-1 ring-white/[.06]">
+            <mat-icon class="!text-[1.1rem] !h-[1.1rem] !w-[1.1rem] text-brand-accent">group</mat-icon>
+          </div>
+          <div>
+            <p class="font-semibold text-[0.875rem] m-0">Build Community</p>
+            <p class="text-white/45 text-xs m-0 mt-0.5">Connect with like-minded readers</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-3.5">
+          <div class="w-9 h-9 rounded-lg bg-brand-accent/[.15] flex items-center justify-center shrink-0 ring-1 ring-white/[.06]">
+            <mat-icon class="!text-[1.1rem] !h-[1.1rem] !w-[1.1rem] text-brand-accent">trending_up</mat-icon>
+          </div>
+          <div>
+            <p class="font-semibold text-[0.875rem] m-0">Grow Your Reach</p>
+            <p class="text-white/45 text-xs m-0 mt-0.5">Expand your audience every day</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Form panel -->
-  <div class="auth-form-panel">
-    <div class="auth-form-wrapper">
-      <div class="auth-header">
-        <mat-icon class="auth-header__icon">person_add</mat-icon>
-        <h2>Create account</h2>
-        <p>Join MyBlog today â€” it's free</p>
+  <div class="flex-1 flex items-start sm:items-center justify-center p-5 sm:p-8 bg-gradient-to-br from-slate-50 via-blue-50/40 to-indigo-50/30 min-h-screen md:min-h-0">
+    <div class="w-full max-w-[420px] py-2 sm:py-0">
+
+      <div class="flex items-center justify-center gap-2.5 mb-7 md:hidden">
+        <div class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-dark shadow-md">
+          <mat-icon class="!text-[1.4rem] !h-[1.4rem] !w-[1.4rem] !text-brand-accent">book</mat-icon>
+        </div>
+        <span class="text-[1.35rem] font-extrabold text-brand-dark tracking-tight">MyBlog</span>
       </div>
 
-      <form [formGroup]="form" (ngSubmit)="onSubmit()">
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Username</mat-label>
-          <input matInput formControlName="userName" placeholder="your_username">
-          <mat-icon matSuffix>person</mat-icon>
-          <mat-error>
-            @if (form.get('userName')?.hasError('required')) { Username is required }
-            @else if (form.get('userName')?.hasError('minlength')) { Minimum 3 characters }
-          </mat-error>
-        </mat-form-field>
+      <div class="bg-white rounded-2xl shadow-xl border border-black/[.05] p-7 sm:p-9 animate-fade-in">
 
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Email</mat-label>
-          <input matInput type="email" formControlName="email" placeholder="you@example.com">
-          <mat-icon matSuffix>email</mat-icon>
-          <mat-error>
-            @if (form.get('email')?.hasError('required')) { Email is required }
-            @else if (form.get('email')?.hasError('email')) { Enter a valid email }
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Password</mat-label>
-          <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password">
-          <button mat-icon-button matSuffix type="button" (click)="hidePassword = !hidePassword">
-            <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
-          </button>
-          <mat-error>
-            @if (form.get('password')?.hasError('required')) { Password is required }
-            @else if (form.get('password')?.hasError('minlength')) { Minimum 6 characters }
-          </mat-error>
-        </mat-form-field>
-
-        @if (errorMessages.length > 0) {
-          <div class="form-error-banner">
-            <mat-icon>error_outline</mat-icon>
-            <div>
-              @for (err of errorMessages; track err) {
-                <div>{{ err }}</div>
-              }
-            </div>
+        <div class="text-center mb-7">
+          <div class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-blue-50 ring-1 ring-blue-100 mb-4">
+            <mat-icon class="auth-header__icon">person_add</mat-icon>
           </div>
-        }
+          <h2 class="text-[1.5rem] sm:text-[1.75rem] font-bold text-brand-dark mt-0 mb-1.5 tracking-tight">Create account</h2>
+          <p class="text-slate-500 m-0 text-[0.875rem]">Join MyBlog today â€? it's free</p>
+        </div>
 
-        <button mat-raised-button color="primary" type="submit" class="full-width submit-btn" [disabled]="loading">
-          @if (loading) { <mat-spinner diameter="20"></mat-spinner> }
-          @else { Create Account }
-        </button>
-      </form>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Username</mat-label>
+            <input matInput formControlName="userName" placeholder="your_username">
+            <mat-icon matSuffix>person</mat-icon>
+            <mat-error>
+              @if (form.get('userName')?.hasError('required')) { Username is required }
+              @else if (form.get('userName')?.hasError('minlength')) { Minimum 3 characters }
+            </mat-error>
+          </mat-form-field>
 
-      <div class="auth-footer">
-        <p>Already have an account? <a routerLink="/login">Sign In</a></p>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" formControlName="email" placeholder="you@example.com">
+            <mat-icon matSuffix>email</mat-icon>
+            <mat-error>
+              @if (form.get('email')?.hasError('required')) { Email is required }
+              @else if (form.get('email')?.hasError('email')) { Enter a valid email }
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Password</mat-label>
+            <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password">
+            <button mat-icon-button matSuffix type="button" (click)="hidePassword = !hidePassword">
+              <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+            <mat-error>
+              @if (form.get('password')?.hasError('required')) { Password is required }
+              @else if (form.get('password')?.hasError('minlength')) { Minimum 6 characters }
+            </mat-error>
+          </mat-form-field>
+
+          @if (form.get('password')?.value) {
+            <div class="mb-4 -mt-2 animate-fade-in">
+              <div class="flex gap-1.5 mb-1.5">
+                <div class="h-1.5 flex-1 rounded-full transition-all duration-300"
+                  [style.background]="passwordStrength >= 1 ? passwordStrengthColor : '#e5e7eb'"></div>
+                <div class="h-1.5 flex-1 rounded-full transition-all duration-300"
+                  [style.background]="passwordStrength >= 2 ? passwordStrengthColor : '#e5e7eb'"></div>
+                <div class="h-1.5 flex-1 rounded-full transition-all duration-300"
+                  [style.background]="passwordStrength >= 3 ? passwordStrengthColor : '#e5e7eb'"></div>
+                <div class="h-1.5 flex-1 rounded-full transition-all duration-300"
+                  [style.background]="passwordStrength >= 4 ? passwordStrengthColor : '#e5e7eb'"></div>
+              </div>
+              <p class="text-xs m-0 font-medium" [style.color]="passwordStrengthColor">{{ passwordStrengthLabel }}</p>
+            </div>
+          }
+
+          @if (errorMessages.length > 0) {
+            <div class="flex items-start gap-2.5 bg-red-50 border border-red-200 rounded-xl px-4 py-3 text-red-700 text-sm mb-5 animate-fade-in">
+              <mat-icon class="!text-[1.1rem] !h-[1.1rem] !w-[1.1rem] shrink-0 mt-px">error_outline</mat-icon>
+              <div class="flex flex-col gap-0.5">
+                @for (err of errorMessages; track err) { <span>{{ err }}</span> }
+              </div>
+            </div>
+          }
+
+          <button mat-raised-button color="primary" type="submit"
+            class="auth-submit-btn full-width !h-12 !text-base !font-semibold !rounded-xl !flex !items-center !justify-center !gap-2 !text-white"
+            [disabled]="loading">
+            @if (loading) { <mat-spinner diameter="20"></mat-spinner> }
+            @else { Create Account }
+          </button>
+        </form>
+          <div class="text-center mt-7 pt-6 border-t border-black/[.06]">
+            <a mat-button class="!text-slate-500 !text-[0.875rem] hover:!text-blue-600 !transition-colors !duration-150 !gap-1" routerLink="/login">
+              <mat-icon class="![font-size:1rem] ![height:1rem] ![width:1rem] align-middle">arrow_back</mat-icon>
+              Back to Sign In
+            </a>
+          </div>
+      </div>
+
+      <div class="text-center mt-6">
+        <p class="text-slate-500 text-[0.875rem] m-0">
+          Already have an account?
+          <a class="text-blue-600 font-semibold hover:text-blue-800 hover:underline transition-colors duration-150" routerLink="/login">Sign In</a>
+        </p>
       </div>
     </div>
   </div>

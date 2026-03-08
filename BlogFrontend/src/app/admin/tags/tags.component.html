@@ -1,6 +1,6 @@
-<div class="admin-page">
-  <div class="page-header">
-    <h2>Tags</h2>
+<div class="max-w-[1200px] mx-auto animate-fade-in">
+  <div class="flex items-center justify-between mb-6 flex-wrap gap-4">
+    <h2 class="text-[1.35rem] sm:text-[1.75rem] font-bold text-brand-dark m-0">Tags</h2>
     <button mat-raised-button color="primary" (click)="newTag()">
       <mat-icon>add</mat-icon> New Tag
     </button>
@@ -11,7 +11,7 @@
   }
 
   <mat-card>
-    <div class="table-container">
+    <div class="overflow-x-auto rounded-lg">
       <table mat-table [dataSource]="tags" class="full-width">
 
         <ng-container matColumnDef="name">
@@ -46,9 +46,9 @@
     </div>
 
     @if (!loading && tags.length === 0) {
-      <div class="no-data">
-        <mat-icon>label</mat-icon>
-        <p>No tags yet.</p>
+      <div class="text-center py-12 px-8 text-[#5f6368] italic">
+        <mat-icon class="![font-size:3rem] ![height:3rem] ![width:3rem] block mx-auto mb-4 opacity-40">label</mat-icon>
+        <p class="m-0">No tags yet.</p>
       </div>
     }
   </mat-card>

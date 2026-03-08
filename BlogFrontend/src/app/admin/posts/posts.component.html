@@ -1,6 +1,6 @@
-<div class="admin-page">
-  <div class="page-header">
-    <h2>Posts</h2>
+<div class="max-w-[1200px] mx-auto animate-fade-in">
+  <div class="flex items-center justify-between mb-6 flex-wrap gap-4">
+    <h2 class="text-[1.35rem] sm:text-[1.75rem] font-bold text-brand-dark m-0">Posts</h2>
     <button mat-raised-button color="primary" (click)="newPost()">
       <mat-icon>add</mat-icon> New Post
     </button>
@@ -11,7 +11,7 @@
   }
 
   <mat-card>
-    <div class="table-container">
+    <div class="overflow-x-auto rounded-lg">
       <table mat-table [dataSource]="posts" class="full-width">
 
         <ng-container matColumnDef="title">
@@ -56,9 +56,9 @@
     </div>
 
     @if (!loading && posts.length === 0) {
-      <div class="no-data">
-        <mat-icon>article</mat-icon>
-        <p>No posts yet. Create your first post!</p>
+      <div class="text-center py-12 px-8 text-[#5f6368] italic">
+        <mat-icon class="![font-size:3rem] ![height:3rem] ![width:3rem] block mx-auto mb-4 opacity-40">article</mat-icon>
+        <p class="m-0">No posts yet. Create your first post!</p>
       </div>
     }
   </mat-card>
