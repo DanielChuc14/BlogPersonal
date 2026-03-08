@@ -149,6 +149,8 @@ namespace API.Blog.API.Controllers
             var token = GenerateToken(existUser);
             return Ok(new AuthResult()
             {
+                User = existUser.Id,
+                UserEmail = userDto.Email,
                 Result = true,
                 Token = token
             });

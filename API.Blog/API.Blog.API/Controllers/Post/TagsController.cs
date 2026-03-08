@@ -1,6 +1,6 @@
-﻿using API.Blog.Data;
+using API.Blog.Data;
 using API.Blog.Shared;
-using Microsoft.AspNetCore.Http;
+using API.Blog.Shared.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,7 +10,8 @@ namespace API.Blog.API.Controllers.Post
     [ApiController]
     public class TagsController : ControllerBase
     {
-        private readonly Data.DataContext _context;
+        private readonly DataContext _context;
+
         public TagsController(DataContext context)
         {
             _context = context;
@@ -18,36 +19,53 @@ namespace API.Blog.API.Controllers.Post
 
         // GET: api/Tags
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Tag>>> GetTags()
+        public async Task<ActionResult<IEnumerable<TagDto>>> GetTags()
         {
-            return await _context.Tags.ToListAsync();
+            return await _context.Tags
+                .Select(t => new TagDto
+                {
+                    Id = t.Id,
+                    Name = t.Name,
+                    Description = t.Description,
+                    CreatedAt = t.CreatedAt,
+                    UpdatedAt = t.UpdatedAt
+                })
+                .ToListAsync();
         }
 
         // GET: api/Tags/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Tag>> GetTag(int id)
+        public async Task<ActionResult<TagDto>> GetTag(int id)
         {
             var tag = await _context.Tags.FindAsync(id);
 
             if (tag == null)
-            {
                 return NotFound();
-            }
 
-            return tag;
+            return new TagDto
+            {
+                Id = tag.Id,
+                Name = tag.Name,
+                Description = tag.Description,
+                CreatedAt = tag.CreatedAt,
+                UpdatedAt = tag.UpdatedAt
+            };
         }
 
         // PUT: api/Tags/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTag(int id, Tag tag)
+        public async Task<IActionResult> PutTag(int id, TagDto dto)
         {
-            if (id != tag.Id)
-            {
+            if (id != dto.Id)
                 return BadRequest();
-            }
 
-            _context.Entry(tag).State = EntityState.Modified;
+            var tag = await _context.Tags.FindAsync(id);
+            if (tag == null)
+                return NotFound();
+
+            tag.Name = dto.Name;
+            tag.Description = dto.Description;
+            tag.UpdatedAt = DateTime.UtcNow;
 
             try
             {
@@ -56,41 +74,32 @@ namespace API.Blog.API.Controllers.Post
             catch (DbUpdateConcurrencyException)
             {
                 if (!TagExists(id))
-                {
                     return NotFound();
-                }
                 else
-                {
                     throw;
-                }
             }
 
             return NoContent();
         }
 
         // POST: api/Tags
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Tag>> PostTag(Tag tag)
+        public async Task<ActionResult<TagDto>> PostTag(TagDto dto)
         {
-            _context.Tags.Add(tag);
-            try
+            var tag = new Tag
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (TagExists(tag.Id))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+                Name = dto.Name,
+                Description = dto.Description,
+                CreatedAt = DateTime.UtcNow
+            };
 
-            return CreatedAtAction("GetTag", new { id = tag.Id }, tag);
+            _context.Tags.Add(tag);
+            await _context.SaveChangesAsync();
+
+            dto.Id = tag.Id;
+            dto.CreatedAt = tag.CreatedAt;
+
+            return CreatedAtAction(nameof(GetTag), new { id = tag.Id }, dto);
         }
 
         // DELETE: api/Tags/5
@@ -99,9 +108,7 @@ namespace API.Blog.API.Controllers.Post
         {
             var tag = await _context.Tags.FindAsync(id);
             if (tag == null)
-            {
                 return NotFound();
-            }
 
             _context.Tags.Remove(tag);
             await _context.SaveChangesAsync();

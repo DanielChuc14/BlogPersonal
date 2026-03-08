@@ -1,6 +1,6 @@
-﻿using API.Blog.Data;
+using API.Blog.Data;
 using API.Blog.Shared;
-using Microsoft.AspNetCore.Http;
+using API.Blog.Shared.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,6 +11,7 @@ namespace API.Blog.API.Controllers.Post
     public class PostCategoriesController : ControllerBase
     {
         private readonly DataContext _context;
+
         public PostCategoriesController(DataContext context)
         {
             _context = context;
@@ -18,36 +19,48 @@ namespace API.Blog.API.Controllers.Post
 
         // GET: api/PostCategories
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<PostCategory>>> GetPostCategories()
+        public async Task<ActionResult<IEnumerable<PostCategoryDto>>> GetPostCategories()
         {
-            return await _context.PostCategories.ToListAsync();
+            return await _context.PostCategories
+                .Select(pc => new PostCategoryDto
+                {
+                    Id = pc.Id,
+                    PostId = pc.PostId,
+                    CategoryId = pc.CategoryId
+                })
+                .ToListAsync();
         }
 
         // GET: api/PostCategories/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<PostCategory>> GetPostCategory(int id)
+        public async Task<ActionResult<PostCategoryDto>> GetPostCategory(int id)
         {
             var postCategory = await _context.PostCategories.FindAsync(id);
 
             if (postCategory == null)
-            {
                 return NotFound();
-            }
 
-            return postCategory;
+            return new PostCategoryDto
+            {
+                Id = postCategory.Id,
+                PostId = postCategory.PostId,
+                CategoryId = postCategory.CategoryId
+            };
         }
 
         // PUT: api/PostCategories/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPostCategory(int id, PostCategory postCategory)
+        public async Task<IActionResult> PutPostCategory(int id, PostCategoryDto dto)
         {
-            if (id != postCategory.Id)
-            {
+            if (id != dto.Id)
                 return BadRequest();
-            }
 
-            _context.Entry(postCategory).State = EntityState.Modified;
+            var postCategory = await _context.PostCategories.FindAsync(id);
+            if (postCategory == null)
+                return NotFound();
+
+            postCategory.PostId = dto.PostId;
+            postCategory.CategoryId = dto.CategoryId;
 
             try
             {
@@ -56,41 +69,30 @@ namespace API.Blog.API.Controllers.Post
             catch (DbUpdateConcurrencyException)
             {
                 if (!PostCategoryExists(id))
-                {
                     return NotFound();
-                }
                 else
-                {
                     throw;
-                }
             }
 
             return NoContent();
         }
 
         // POST: api/PostCategories
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<PostCategory>> PostPostCategory(PostCategory postCategory)
+        public async Task<ActionResult<PostCategoryDto>> PostPostCategory(PostCategoryDto dto)
         {
-            _context.PostCategories.Add(postCategory);
-            try
+            var postCategory = new PostCategory
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (PostCategoryExists(postCategory.Id))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+                PostId = dto.PostId,
+                CategoryId = dto.CategoryId
+            };
 
-            return CreatedAtAction("GetPostCategory", new { id = postCategory.Id }, postCategory);
+            _context.PostCategories.Add(postCategory);
+            await _context.SaveChangesAsync();
+
+            dto.Id = postCategory.Id;
+
+            return CreatedAtAction(nameof(GetPostCategory), new { id = postCategory.Id }, dto);
         }
 
         // DELETE: api/PostCategories/5
@@ -99,9 +101,7 @@ namespace API.Blog.API.Controllers.Post
         {
             var postCategory = await _context.PostCategories.FindAsync(id);
             if (postCategory == null)
-            {
                 return NotFound();
-            }
 
             _context.PostCategories.Remove(postCategory);
             await _context.SaveChangesAsync();
