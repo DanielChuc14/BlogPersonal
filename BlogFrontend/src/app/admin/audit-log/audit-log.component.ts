@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
 import { AuditLogService } from '../../core/services/audit-log.service';
+import { NotificationService } from '../../core/services/notification.service';
 import { AuditLog, PagedResult } from '../../core/models/audit-log.model';
 
 @Component({
@@ -19,7 +20,11 @@ export class AuditLogComponent implements OnInit {
   filterForm: FormGroup;
   displayedColumns = ['timestamp', 'actor', 'action', 'target', 'details'];
 
-  constructor(private auditService: AuditLogService, private fb: FormBuilder) {
+  constructor(
+    private auditService: AuditLogService,
+    private fb: FormBuilder,
+    private notify: NotificationService
+  ) {
     this.filterForm = this.fb.group({
       action: [''],
       targetType: [''],
@@ -50,7 +55,10 @@ export class AuditLogComponent implements OnInit {
         this.total = result.total;
         this.loading = false;
       },
-      error: () => { this.loading = false; }
+      error: () => {
+        this.loading = false;
+        this.notify.danger('Failed to load audit log.');
+      }
     });
   }
 

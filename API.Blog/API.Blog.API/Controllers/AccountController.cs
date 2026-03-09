@@ -55,7 +55,7 @@ namespace API.Blog.API.Controllers
             var isCreated = await _userManager.CreateAsync(user, request.Password);
             if (isCreated.Succeeded)
             {
-                var token = GenerateToken(user);
+                var token = await GenerateTokenAsync(user);
                 return Ok(new AuthResult()
                 {
                     Result = true,
@@ -146,7 +146,7 @@ namespace API.Blog.API.Controllers
                 Result = false
             });
 
-            var token = GenerateToken(existUser);
+            var token = await GenerateTokenAsync(existUser);
             return Ok(new AuthResult()
             {
                 User = existUser.Id,
@@ -155,24 +155,32 @@ namespace API.Blog.API.Controllers
                 Token = token
             });
         }
-        private string GenerateToken(IdentityUser user)
+        private async Task<string> GenerateTokenAsync(AspNetUser user)
         {
+            var roles = await _userManager.GetRolesAsync(user);
+
+            var claims = new List<Claim>
+            {
+                new Claim("Id", user.Id),
+                new Claim(JwtRegisteredClaimNames.Sub, user.Email!),
+                new Claim(JwtRegisteredClaimNames.Email, user.Email!),
+                new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName ?? user.Email!),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString())
+            };
+
+            foreach (var role in roles)
+                claims.Add(new Claim(ClaimTypes.Role, role));
+
             var jwtTokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.UTF8.GetBytes(_jwtConfig.Secret);
-            var tokenDescriptor = new SecurityTokenDescriptor()
+            var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new System.Security.Claims.ClaimsIdentity(new ClaimsIdentity(new[]
-                {
-                    new Claim("Id", user.Id),
-                    new Claim(JwtRegisteredClaimNames.Sub, user.Email),
-                    new Claim(JwtRegisteredClaimNames.Email, user.Email),
-                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                    new Claim(JwtRegisteredClaimNames.Iat, DateTime.Now.ToUniversalTime().ToString())
-                }
-                )),
+                Subject = new ClaimsIdentity(claims),
                 Expires = DateTime.UtcNow.AddHours(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256)
             };
+
             var token = jwtTokenHandler.CreateToken(tokenDescriptor);
             return jwtTokenHandler.WriteToken(token);
         }

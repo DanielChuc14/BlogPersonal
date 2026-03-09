@@ -1,5 +1,6 @@
 
 using API.Blog.API.Configuration;
+using API.Blog.API.Seeders;
 using API.Blog.API.Services;
 using API.Blog.Data;
 using API.Blog.Shared;
@@ -67,6 +68,9 @@ builder.Services.AddCors(options =>
 
 
 var app = builder.Build();
+
+// Seed database
+await DbSeeder.SeedAsync(app.Services);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

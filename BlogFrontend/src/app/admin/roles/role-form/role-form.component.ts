@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RoleService } from '../../../core/services/role.service';
+import { NotificationService } from '../../../core/services/notification.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -20,7 +21,8 @@ export class RoleFormComponent implements OnInit {
     private fb: FormBuilder,
     private roleService: RoleService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private notify: NotificationService
   ) {
     this.form = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2)]]
@@ -35,7 +37,10 @@ export class RoleFormComponent implements OnInit {
       this.loading = true;
       this.roleService.getById(id).subscribe({
         next: role => { this.form.patchValue({ name: role.name }); this.loading = false; },
-        error: () => { this.loading = false; }
+        error: () => {
+          this.loading = false;
+          this.notify.danger('Could not load role.');
+        }
       });
     }
   }
@@ -50,8 +55,16 @@ export class RoleFormComponent implements OnInit {
       : this.roleService.create(name);
 
     save$.subscribe({
-      next: () => { this.saving = false; this.router.navigate(['/admin/roles']); },
-      error: () => { this.saving = false; }
+      next: () => {
+        this.saving = false;
+        this.notify.success(this.isEdit ? `Role "${name}" updated.` : `Role "${name}" created.`);
+        this.router.navigate(['/admin/roles']);
+      },
+      error: err => {
+        this.saving = false;
+        const msg = err?.error?.message ?? (this.isEdit ? 'Failed to update role.' : 'Failed to create role.');
+        this.notify.danger(msg);
+      }
     });
   }
 

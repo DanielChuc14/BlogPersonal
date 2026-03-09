@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { from, Observable, of, switchMap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { AuthResult, LoginRequest, RegisterRequest } from '../models/auth.model';
 import { SecureStorageService } from './secure-storage.service';
@@ -9,6 +9,8 @@ import { SecureStorageService } from './secure-storage.service';
 export class AuthService {
 
   private readonly TOKEN_KEY = 'auth_token';
+  private readonly USER_KEY = 'user_token';
+  private readonly EMAIL_KEY = 'email_token';
 
   private _token: string | null = null;
 
@@ -23,11 +25,11 @@ export class AuthService {
     return this.http
       .post<AuthResult>(`${environment.apiBaseUrl}/Account/Login`, payload)
       .pipe(
-        switchMap(res => {
-          if (res.result && res.token) {
-            return from(this.saveToken(res.token)).pipe(switchMap(() => of(res)));
-          }
-          return of(res);
+        tap(res => {
+          console.log(res);
+          if (res.result && res.token) this.saveToken(res.token);
+          if (res.result && res.user) this.saveUserToken(res.user);
+          if (res.result && res.userEmail) this.saveEmailToken(res.userEmail);
         })
       );
   }
@@ -36,11 +38,10 @@ export class AuthService {
     return this.http
       .post<AuthResult>(`${environment.apiBaseUrl}/Account/Register`, payload)
       .pipe(
-        switchMap(res => {
-          if (res.result && res.token) {
-            return from(this.saveToken(res.token)).pipe(switchMap(() => of(res)));
-          }
-          return of(res);
+        tap(res => {
+          if (res.result && res.token) this.saveToken(res.token);
+          if (res.result && res.user) this.saveUserToken(res.user);
+          if (res.result && res.userEmail) this.saveEmailToken(res.userEmail);
         })
       );
   }
@@ -69,18 +70,22 @@ export class AuthService {
 
   logout(): void {
     this._token = null;
-    this.secureStorage.removeItem(this.TOKEN_KEY);
+    this.secureStorage.clear();
   }
 
-  private async saveToken(token: string): Promise<void> {
+  private saveToken(token: string): void {
     this._token = token;
-    await this.secureStorage.setItem(this.TOKEN_KEY, token);
+    this.secureStorage.setItem(this.TOKEN_KEY, token);
+  }
+  private saveUserToken(token: string): void {
+    this.secureStorage.setItem(this.USER_KEY, token);
+  }
+  private saveEmailToken(token: string): void {
+    this.secureStorage.setItem(this.EMAIL_KEY, token);
   }
 
   private restoreToken(): void {
-    const stored = localStorage.getItem(this.TOKEN_KEY);
-    if (stored) {
-      this._token = stored;
-    }
+    const token = this.secureStorage.getItem<string>(this.TOKEN_KEY);
+    if (token) this._token = token;
   }
 }

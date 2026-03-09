@@ -1,12 +1,14 @@
 using API.Blog.Data;
 using API.Blog.Shared;
 using API.Blog.Shared.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Blog.API.Controllers.Post
 {
     [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
     public class PostCategoriesController : ControllerBase
     {

@@ -12,5 +12,7 @@ export interface LoginRequest {
 export interface AuthResult {
   result: boolean;
   token?: string;
+  user?: string;
+  userEmail?: string;
   errors?: string[];
 }

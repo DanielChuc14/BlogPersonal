@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { UserAdminService } from '../../core/services/user-admin.service';
+import { NotificationService } from '../../core/services/notification.service';
+import { ConfirmDialogService } from '../../core/services/confirm-dialog.service';
 import { UserSummary } from '../../core/models/user.model';
 
 @Component({
@@ -20,7 +22,11 @@ export class UserManagerComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private userService: UserAdminService) {}
+  constructor(
+    private userService: UserAdminService,
+    private notify: NotificationService,
+    private confirm: ConfirmDialogService
+  ) {}
 
   ngOnInit(): void {
     this.load();
@@ -34,7 +40,10 @@ export class UserManagerComponent implements OnInit {
         this.total = result.total;
         this.loading = false;
       },
-      error: () => { this.loading = false; }
+      error: () => {
+        this.loading = false;
+        this.notify.danger('Failed to load users.');
+      }
     });
   }
 
@@ -50,29 +59,73 @@ export class UserManagerComponent implements OnInit {
   }
 
   lock(user: UserSummary): void {
-    this.actionLoading[user.id] = true;
-    this.userService.lock(user.id).subscribe({
-      next: () => { this.actionLoading[user.id] = false; this.load(); },
-      error: () => { this.actionLoading[user.id] = false; }
+    this.confirm.open({
+      title: 'Lock User',
+      message: `Lock <strong>${user.email}</strong>? They will not be able to log in.`,
+      confirmText: 'Lock',
+      cancelText: 'Cancel',
+      icon: 'lock'
+    }).subscribe(confirmed => {
+      if (!confirmed) return;
+      this.actionLoading[user.id] = true;
+      this.userService.lock(user.id).subscribe({
+        next: () => {
+          this.actionLoading[user.id] = false;
+          this.notify.warning(`User ${user.email} has been locked.`);
+          this.load();
+        },
+        error: () => {
+          this.actionLoading[user.id] = false;
+          this.notify.danger('Failed to lock user.');
+        }
+      });
     });
   }
 
   unlock(user: UserSummary): void {
-    this.actionLoading[user.id] = true;
-    this.userService.unlock(user.id).subscribe({
-      next: () => { this.actionLoading[user.id] = false; this.load(); },
-      error: () => { this.actionLoading[user.id] = false; }
+    this.confirm.open({
+      title: 'Unlock User',
+      message: `Unlock <strong>${user.email}</strong>?`,
+      confirmText: 'Unlock',
+      cancelText: 'Cancel',
+      icon: 'lock_open'
+    }).subscribe(confirmed => {
+      if (!confirmed) return;
+      this.actionLoading[user.id] = true;
+      this.userService.unlock(user.id).subscribe({
+        next: () => {
+          this.actionLoading[user.id] = false;
+          this.notify.success(`User ${user.email} has been unlocked.`);
+          this.load();
+        },
+        error: () => {
+          this.actionLoading[user.id] = false;
+          this.notify.danger('Failed to unlock user.');
+        }
+      });
     });
   }
 
   resetPassword(user: UserSummary): void {
-    this.actionLoading[user.id] = true;
-    this.userService.resetPassword(user.id).subscribe({
-      next: (res: any) => {
-        this.actionLoading[user.id] = false;
-        alert(`Reset token for ${res.email}:\n${res.token}`);
-      },
-      error: () => { this.actionLoading[user.id] = false; }
+    this.confirm.open({
+      title: 'Reset Password',
+      message: `Generate a password reset token for <strong>${user.email}</strong>?`,
+      confirmText: 'Reset',
+      cancelText: 'Cancel',
+      icon: 'key'
+    }).subscribe(confirmed => {
+      if (!confirmed) return;
+      this.actionLoading[user.id] = true;
+      this.userService.resetPassword(user.id).subscribe({
+        next: (res: any) => {
+          this.actionLoading[user.id] = false;
+          this.notify.info(`Reset token generated for ${res.email}.`);
+        },
+        error: () => {
+          this.actionLoading[user.id] = false;
+          this.notify.danger('Failed to generate reset token.');
+        }
+      });
     });
   }
 }
