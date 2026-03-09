@@ -1,8 +1,10 @@
 
 using API.Blog.API.Configuration;
+using API.Blog.API.Services;
 using API.Blog.Data;
 using API.Blog.Shared;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -45,7 +47,11 @@ builder.Services.AddAuthentication(options =>
 });
 //Activar en pruductivo
 builder.Services.AddDefaultIdentity<AspNetUser>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<DataContext>();
+
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<IAuditService, AuditService>();
 // Configurar CORS
 builder.Services.AddCors(options =>
 {

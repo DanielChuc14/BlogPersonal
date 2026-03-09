@@ -25,9 +25,23 @@
         <mat-icon matListItemIcon>label</mat-icon>
         <span style="color: white;" matListItemTitle>Tags</span>
       </a>
+      <mat-divider style="border-color: rgba(255,255,255,0.15); margin: 8px 0;"></mat-divider>
       <a mat-list-item routerLink="/admin/users" routerLinkActive="active" (click)="closeSidenavOnMobile()">
         <mat-icon matListItemIcon>people</mat-icon>
         <span style="color: white;" matListItemTitle>Users</span>
+      </a>
+      <a mat-list-item routerLink="/admin/roles" routerLinkActive="active" (click)="closeSidenavOnMobile()">
+        <mat-icon matListItemIcon>shield</mat-icon>
+        <span style="color: white;" matListItemTitle>Roles</span>
+      </a>
+      <a mat-list-item routerLink="/admin/permissions" routerLinkActive="active" (click)="closeSidenavOnMobile()">
+        <mat-icon matListItemIcon>vpn_key</mat-icon>
+        <span style="color: white;" matListItemTitle>Permissions</span>
+      </a>
+      <mat-divider style="border-color: rgba(255,255,255,0.15); margin: 8px 0;"></mat-divider>
+      <a mat-list-item routerLink="/admin/audit" routerLinkActive="active" (click)="closeSidenavOnMobile()">
+        <mat-icon matListItemIcon>receipt_long</mat-icon>
+        <span style="color: white;" matListItemTitle>Audit Log</span>
       </a>
     </mat-nav-list>
 

@@ -20,10 +20,26 @@ namespace API.Blog.Data
         public DbSet<PostMeta> PostMetas { get; set; }
         public DbSet<PostTag> PostTags { get; set; }
         public DbSet<Tag> Tags { get; set; }
+        public DbSet<AuditLog> AuditLogs { get; set; }
+        public DbSet<Permission> Permissions { get; set; }
+        public DbSet<RolePermission> RolePermissions { get; set; }
+        public DbSet<UserPermission> UserPermissions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<RolePermission>()
+                .HasIndex(rp => new { rp.RoleId, rp.PermissionName })
+                .IsUnique();
+
+            modelBuilder.Entity<UserPermission>()
+                .HasIndex(up => new { up.UserId, up.PermissionName })
+                .IsUnique();
+
+            modelBuilder.Entity<Permission>()
+                .HasIndex(p => p.Name)
+                .IsUnique();
         }
     }
 

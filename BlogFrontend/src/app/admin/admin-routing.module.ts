@@ -10,6 +10,11 @@ import { CategoriesComponent } from './categories/categories.component';
 import { CategoryFormComponent } from './categories/category-form/category-form.component';
 import { TagsComponent } from './tags/tags.component';
 import { TagFormComponent } from './tags/tag-form/tag-form.component';
+import { RolesComponent } from './roles/roles.component';
+import { RoleFormComponent } from './roles/role-form/role-form.component';
+import { PermissionsComponent } from './permissions/permissions.component';
+import { PermissionFormComponent } from './permissions/permission-form/permission-form.component';
+import { AuditLogComponent } from './audit-log/audit-log.component';
 
 const routes: Routes = [
   {
@@ -28,7 +33,14 @@ const routes: Routes = [
       { path: 'tags', component: TagsComponent },
       { path: 'tags/new', component: TagFormComponent },
       { path: 'tags/edit/:id', component: TagFormComponent },
-      { path: 'users', component: UserManagerComponent }
+      { path: 'users', component: UserManagerComponent },
+      { path: 'roles', component: RolesComponent },
+      { path: 'roles/new', component: RoleFormComponent },
+      { path: 'roles/edit/:id', component: RoleFormComponent },
+      { path: 'permissions', component: PermissionsComponent },
+      { path: 'permissions/new', component: PermissionFormComponent },
+      { path: 'permissions/edit/:id', component: PermissionFormComponent },
+      { path: 'audit', component: AuditLogComponent }
     ]
   }
 ];

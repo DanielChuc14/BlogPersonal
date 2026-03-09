@@ -16,6 +16,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { SharedModule } from '../shared/shared.module';
@@ -38,6 +39,17 @@ import { CategoryFormComponent } from './categories/category-form/category-form.
 import { TagsComponent } from './tags/tags.component';
 import { TagFormComponent } from './tags/tag-form/tag-form.component';
 
+// Roles
+import { RolesComponent } from './roles/roles.component';
+import { RoleFormComponent } from './roles/role-form/role-form.component';
+
+// Permissions
+import { PermissionsComponent } from './permissions/permissions.component';
+import { PermissionFormComponent } from './permissions/permission-form/permission-form.component';
+
+// Audit Log
+import { AuditLogComponent } from './audit-log/audit-log.component';
+
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -48,7 +60,12 @@ import { TagFormComponent } from './tags/tag-form/tag-form.component';
     CategoriesComponent,
     CategoryFormComponent,
     TagsComponent,
-    TagFormComponent
+    TagFormComponent,
+    RolesComponent,
+    RoleFormComponent,
+    PermissionsComponent,
+    PermissionFormComponent,
+    AuditLogComponent
   ],
   imports: [
     CommonModule,
@@ -68,6 +85,7 @@ import { TagFormComponent } from './tags/tag-form/tag-form.component';
     MatTooltipModule,
     MatChipsModule,
     MatDividerModule,
+    MatPaginatorModule,
     AdminRoutingModule
   ]
 })
