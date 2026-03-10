@@ -1,0 +1,24 @@
+<div class="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 shadow-sm overflow-hidden">
+
+  <!-- Indeterminate progress bar while loading/saving -->
+  @if (loading) {
+    <div class="h-0.5 overflow-hidden bg-gray-100 dark:bg-slate-700">
+      <div class="loading-bar h-full bg-brand-accent"></div>
+    </div>
+  }
+
+  <!-- Optional card header -->
+  @if (title) {
+    <div class="px-6 py-4 border-b border-gray-100 dark:border-slate-700">
+      <h3 class="text-base font-semibold text-gray-900 dark:text-white m-0">{{ title }}</h3>
+      @if (subtitle) {
+        <p class="text-sm text-gray-500 dark:text-slate-400 mt-0.5 m-0">{{ subtitle }}</p>
+      }
+    </div>
+  }
+
+  <!-- Form content -->
+  <div class="p-6">
+    <ng-content></ng-content>
+  </div>
+</div>

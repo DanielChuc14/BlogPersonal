@@ -15,6 +15,7 @@ export class CategoryFormComponent implements OnInit {
   categoryId?: number;
   loading = false;
   saving = false;
+  errorMessage = '';
 
   constructor(
     private fb: FormBuilder,
@@ -39,7 +40,10 @@ export class CategoryFormComponent implements OnInit {
           this.form.patchValue({ name: cat.name, description: cat.description ?? '' });
           this.loading = false;
         },
-        error: () => { this.loading = false; }
+        error: () => {
+          this.loading = false;
+          this.errorMessage = 'Failed to load category data. Please go back and try again.';
+        }
       });
     }
   }
@@ -47,6 +51,7 @@ export class CategoryFormComponent implements OnInit {
   onSubmit(): void {
     if (this.form.invalid) return;
     this.saving = true;
+    this.errorMessage = '';
 
     const save$: Observable<any> = this.isEdit && this.categoryId
       ? this.categoryService.update(this.categoryId, this.form.value)
@@ -54,7 +59,10 @@ export class CategoryFormComponent implements OnInit {
 
     save$.subscribe({
       next: () => { this.saving = false; this.router.navigate(['/admin/categories']); },
-      error: () => { this.saving = false; }
+      error: () => {
+        this.saving = false;
+        this.errorMessage = this.isEdit ? 'Failed to update category.' : 'Failed to create category.';
+      }
     });
   }
 

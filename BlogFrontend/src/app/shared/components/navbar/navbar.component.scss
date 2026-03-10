@@ -60,8 +60,14 @@
     color: white !important;
   }
 
+  // Mobile-only theme toggle (shown when desktop-links is hidden)
+  &__mobile-toggle {
+    display: none;
+  }
+
   @media (max-width: 768px) {
     &__desktop-links { display: none; }
     &__menu-btn { display: inline-flex !important; }
+    &__mobile-toggle { display: inline-flex; }
   }
 }

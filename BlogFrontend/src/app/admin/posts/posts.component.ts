@@ -7,6 +7,7 @@ import { Post, PostCategory, PostTag } from '../../core/models/post.model';
 import { Category } from '../../core/models/category.model';
 import { Tag } from '../../core/models/tag.model';
 import { forkJoin } from 'rxjs';
+import { ConfirmDialogService } from '../../core/services/confirm-dialog.service';
 
 @Component({
   selector: 'app-posts',
@@ -21,12 +22,15 @@ export class PostsComponent implements OnInit {
   postTags: PostTag[] = [];
   displayedColumns = ['title', 'status', 'categories', 'tags', 'actions'];
   loading = false;
+  alertMessage = '';
+  alertType: 'success' | 'danger' | 'warning' | 'info' = 'info';
 
   constructor(
     private postService: PostService,
     private categoryService: CategoryService,
     private tagService: TagService,
-    private router: Router
+    private router: Router,
+    private confirm: ConfirmDialogService
   ) {}
 
   ngOnInit(): void {
@@ -50,7 +54,11 @@ export class PostsComponent implements OnInit {
         this.postTags = postTags;
         this.loading = false;
       },
-      error: () => { this.loading = false; }
+      error: () => {
+        this.loading = false;
+        this.alertType = 'danger';
+        this.alertMessage = 'Failed to load posts.';
+      }
     });
   }
 
@@ -72,15 +80,33 @@ export class PostsComponent implements OnInit {
     this.router.navigate(['/admin/posts/edit', id]);
   }
 
-  deletePost(id: number): void {
-    if (!confirm('¿Eliminar este post?')) return;
-    this.postService.delete(id).subscribe(() => this.loadAll());
+  deletePost(post: Post): void {
+    this.confirm.open({
+      title: 'Delete Post',
+      message: `Delete post <strong>${post.title}</strong>? This cannot be undone.`,
+      confirmText: 'Delete',
+      cancelText: 'Cancel',
+      icon: 'delete_forever'
+    }).subscribe(confirmed => {
+      if (!confirmed) return;
+      this.postService.delete(post.id).subscribe({
+        next: () => {
+          this.alertType = 'success';
+          this.alertMessage = `Post "${post.title}" deleted successfully.`;
+          this.loadAll();
+        },
+        error: () => {
+          this.alertType = 'danger';
+          this.alertMessage = 'Failed to delete post.';
+        }
+      });
+    });
   }
 
   getStatusLabel(status?: number): string {
     switch (status) {
-      case 1: return 'Publicado';
-      case 0: return 'Borrador';
+      case 1: return 'Published';
+      case 0: return 'Draft';
       default: return '-';
     }
   }

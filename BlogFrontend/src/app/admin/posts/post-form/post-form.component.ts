@@ -9,6 +9,7 @@ import { TagService } from '../../../core/services/tag.service';
 import { Post, PostCategory, PostTag } from '../../../core/models/post.model';
 import { Category } from '../../../core/models/category.model';
 import { Tag } from '../../../core/models/tag.model';
+import { SecureStorageService } from '../../../core/services/secure-storage.service';
 
 @Component({
   selector: 'app-post-form',
@@ -21,7 +22,8 @@ export class PostFormComponent implements OnInit {
   postId?: number;
   loading = false;
   saving = false;
-
+  errorMessage = '';
+  IdUser : string = "";
   categories: Category[] = [];
   tags: Tag[] = [];
   existingPostCategories: PostCategory[] = [];
@@ -33,7 +35,8 @@ export class PostFormComponent implements OnInit {
     private categoryService: CategoryService,
     private tagService: TagService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private secureStorage: SecureStorageService 
   ) {
     this.form = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(3)]],
@@ -48,7 +51,7 @@ export class PostFormComponent implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.loading = true;
-
+    this.IdUser = this.secureStorage.getItem("user_token") ?? "";
     forkJoin({
       categories: this.categoryService.getAll(),
       tags: this.tagService.getAll(),
@@ -89,17 +92,21 @@ export class PostFormComponent implements OnInit {
         }
         this.loading = false;
       },
-      error: () => { this.loading = false; }
+      error: () => {
+        this.loading = false;
+        this.errorMessage = 'Failed to load post data. Please go back and try again.';
+      }
     });
   }
 
   onSubmit(): void {
     if (this.form.invalid) return;
     this.saving = true;
+    this.errorMessage = '';
 
     const { title, extract, content, status, categoryIds, tagIds } = this.form.value;
-    const postData: Partial<Post> = { title, extract, content, status };
-
+    const postData: Partial<Post> = { title, extract, content, status,userId: this.IdUser };
+    
     const savePost$: Observable<any> = this.isEdit && this.postId
       ? this.postService.update(this.postId, postData)
       : this.postService.create(postData);
@@ -135,7 +142,10 @@ export class PostFormComponent implements OnInit {
         this.saving = false;
         this.router.navigate(['/admin/posts']);
       },
-      error: () => { this.saving = false; }
+      error: () => {
+        this.saving = false;
+        this.errorMessage = this.isEdit ? 'Failed to update post.' : 'Failed to create post.';
+      }
     });
   }
 

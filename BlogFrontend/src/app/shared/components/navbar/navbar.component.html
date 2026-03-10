@@ -23,7 +23,13 @@
         <mat-icon>login</mat-icon> Login
       </a>
     }
+    <app-theme-toggle variant="ghost-light" />
   </div>
+
+  <!-- Mobile-only theme toggle (hidden on desktop; desktop toggle lives inside navbar__desktop-links) -->
+  <span class="navbar__mobile-toggle">
+    <app-theme-toggle variant="ghost-light" />
+  </span>
 
   <!-- Mobile hamburger -->
   <button mat-icon-button class="navbar__menu-btn" [matMenuTriggerFor]="mobileMenu" aria-label="Menu">

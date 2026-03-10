@@ -1,0 +1,41 @@
+@if (visible) {
+  <div
+    role="alert"
+    class="flex items-start gap-3 w-full rounded-xl border px-4 py-3 text-sm animate-fade-in"
+    [ngClass]="{
+      'bg-green-50  border-green-200  text-green-800  dark:bg-green-900/20  dark:border-green-800  dark:text-green-300':  type === 'success',
+      'bg-red-50    border-red-200    text-red-800    dark:bg-red-900/20    dark:border-red-800    dark:text-red-300':    type === 'danger',
+      'bg-yellow-50 border-yellow-200 text-yellow-800 dark:bg-yellow-900/20 dark:border-yellow-800 dark:text-yellow-300': type === 'warning',
+      'bg-blue-50   border-blue-200   text-blue-800   dark:bg-blue-900/20   dark:border-blue-800   dark:text-blue-300':   type === 'info'
+    }">
+
+    <!-- Icon -->
+    <mat-icon
+      class="!text-[1.1rem] !h-[1.1rem] !w-[1.1rem] shrink-0 mt-0.5"
+      [ngClass]="{
+        'text-green-500  dark:text-green-400':  type === 'success',
+        'text-red-500    dark:text-red-400':    type === 'danger',
+        'text-yellow-500 dark:text-yellow-400': type === 'warning',
+        'text-blue-500   dark:text-blue-400':   type === 'info'
+      }">
+      {{ icon }}
+    </mat-icon>
+
+    <!-- Content -->
+    <span class="flex-1 leading-snug font-medium">
+      @if (message) { {{ message }} }
+      <ng-content></ng-content>
+    </span>
+
+    <!-- Dismiss -->
+    @if (dismissible) {
+      <button
+        type="button"
+        class="shrink-0 opacity-50 hover:opacity-100 transition-opacity bg-transparent border-none p-0 cursor-pointer"
+        (click)="dismiss()"
+        aria-label="Dismiss">
+        <mat-icon class="!text-[1rem] !h-4 !w-4">close</mat-icon>
+      </button>
+    }
+  </div>
+}

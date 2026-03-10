@@ -1,81 +1,92 @@
 <div class="max-w-[1200px] mx-auto animate-fade-in">
   <!-- Heading -->
   <div class="mb-8">
-    <h2 class="text-[1.35rem] sm:text-[1.75rem] font-bold text-brand-dark mt-0 mb-1">Dashboard</h2>
-    <p class="m-0 text-[#5f6368] text-[0.95rem]">Welcome back! Here's an overview of your blog.</p>
+    <h2 class="text-[1.35rem] sm:text-[1.75rem] font-bold text-[var(--text-primary)] mt-0 mb-1">Dashboard</h2>
+    <p class="m-0 text-[var(--text-secondary)] text-[0.95rem]">Welcome back! Here's an overview of your blog.</p>
   </div>
 
-  <!-- Stats grid: 2 cols on mobile, auto-fill on sm+ -->
+  <!-- Stats grid -->
   <div class="grid grid-cols-2 sm:[grid-template-columns:repeat(auto-fill,minmax(200px,1fr))] gap-4 sm:gap-5 mb-10">
 
     <!-- Total Posts -->
-    <mat-card class="!rounded-xl ![box-shadow:0_2px_12px_rgba(0,0,0,0.07)] transition-all duration-200 hover:-translate-y-1 hover:![box-shadow:0_6px_24px_rgba(0,0,0,0.12)]">
-      <mat-card-content class="!flex !items-center !gap-3 sm:!gap-4 !p-4 sm:!p-6">
-        <div class="rounded-xl p-2.5 sm:p-3 shrink-0 bg-[#e3f2fd]">
-          <mat-icon class="![font-size:1.5rem] sm:![font-size:1.75rem] ![height:1.5rem] sm:![height:1.75rem] ![width:1.5rem] sm:![width:1.75rem] block text-[#1565c0]">article</mat-icon>
-        </div>
-        <div class="min-w-0">
-          <span class="block text-[1.75rem] sm:text-[2.25rem] font-extrabold leading-none text-brand-dark">{{ totalPosts }}</span>
-          <span class="block text-[0.7rem] sm:text-[0.8rem] text-[#5f6368] uppercase tracking-wide mt-1">Total Posts</span>
-        </div>
-      </mat-card-content>
-    </mat-card>
+    <div class="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 shadow-sm
+                flex items-center gap-3 sm:gap-4 p-4 sm:p-6
+                transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
+      <div class="rounded-xl p-2.5 sm:p-3 shrink-0 bg-blue-50 dark:bg-blue-900/20">
+        <mat-icon class="![font-size:1.5rem] sm:![font-size:1.75rem] ![height:1.5rem] sm:![height:1.75rem] ![width:1.5rem] sm:![width:1.75rem] block text-blue-600 dark:text-blue-400">article</mat-icon>
+      </div>
+      <div class="min-w-0">
+        <span class="block text-[1.75rem] sm:text-[2.25rem] font-extrabold leading-none text-[var(--text-primary)]">{{ totalPosts }}</span>
+        <span class="block text-[0.7rem] sm:text-[0.8rem] text-[var(--text-secondary)] uppercase tracking-wide mt-1">Total Posts</span>
+      </div>
+    </div>
 
     <!-- Published -->
-    <mat-card class="!rounded-xl ![box-shadow:0_2px_12px_rgba(0,0,0,0.07)] transition-all duration-200 hover:-translate-y-1 hover:![box-shadow:0_6px_24px_rgba(0,0,0,0.12)]">
-      <mat-card-content class="!flex !items-center !gap-3 sm:!gap-4 !p-4 sm:!p-6">
-        <div class="rounded-xl p-2.5 sm:p-3 shrink-0 bg-[#e8f5e9]">
-          <mat-icon class="![font-size:1.5rem] sm:![font-size:1.75rem] ![height:1.5rem] sm:![height:1.75rem] ![width:1.5rem] sm:![width:1.75rem] block text-[#2e7d32]">check_circle</mat-icon>
-        </div>
-        <div class="min-w-0">
-          <span class="block text-[1.75rem] sm:text-[2.25rem] font-extrabold leading-none text-brand-dark">{{ publishedPosts }}</span>
-          <span class="block text-[0.7rem] sm:text-[0.8rem] text-[#5f6368] uppercase tracking-wide mt-1">Published</span>
-        </div>
-      </mat-card-content>
-    </mat-card>
+    <div class="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 shadow-sm
+                flex items-center gap-3 sm:gap-4 p-4 sm:p-6
+                transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
+      <div class="rounded-xl p-2.5 sm:p-3 shrink-0 bg-green-50 dark:bg-green-900/20">
+        <mat-icon class="![font-size:1.5rem] sm:![font-size:1.75rem] ![height:1.5rem] sm:![height:1.75rem] ![width:1.5rem] sm:![width:1.75rem] block text-green-600 dark:text-green-400">check_circle</mat-icon>
+      </div>
+      <div class="min-w-0">
+        <span class="block text-[1.75rem] sm:text-[2.25rem] font-extrabold leading-none text-[var(--text-primary)]">{{ publishedPosts }}</span>
+        <span class="block text-[0.7rem] sm:text-[0.8rem] text-[var(--text-secondary)] uppercase tracking-wide mt-1">Published</span>
+      </div>
+    </div>
 
     <!-- Categories -->
-    <mat-card class="!rounded-xl ![box-shadow:0_2px_12px_rgba(0,0,0,0.07)] transition-all duration-200 hover:-translate-y-1 hover:![box-shadow:0_6px_24px_rgba(0,0,0,0.12)]">
-      <mat-card-content class="!flex !items-center !gap-3 sm:!gap-4 !p-4 sm:!p-6">
-        <div class="rounded-xl p-2.5 sm:p-3 shrink-0 bg-[#f3e5f5]">
-          <mat-icon class="![font-size:1.5rem] sm:![font-size:1.75rem] ![height:1.5rem] sm:![height:1.75rem] ![width:1.5rem] sm:![width:1.75rem] block text-[#7b1fa2]">category</mat-icon>
-        </div>
-        <div class="min-w-0">
-          <span class="block text-[1.75rem] sm:text-[2.25rem] font-extrabold leading-none text-brand-dark">{{ totalCategories }}</span>
-          <span class="block text-[0.7rem] sm:text-[0.8rem] text-[#5f6368] uppercase tracking-wide mt-1">Categories</span>
-        </div>
-      </mat-card-content>
-    </mat-card>
+    <div class="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 shadow-sm
+                flex items-center gap-3 sm:gap-4 p-4 sm:p-6
+                transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
+      <div class="rounded-xl p-2.5 sm:p-3 shrink-0 bg-purple-50 dark:bg-purple-900/20">
+        <mat-icon class="![font-size:1.5rem] sm:![font-size:1.75rem] ![height:1.5rem] sm:![height:1.75rem] ![width:1.5rem] sm:![width:1.75rem] block text-purple-600 dark:text-purple-400">category</mat-icon>
+      </div>
+      <div class="min-w-0">
+        <span class="block text-[1.75rem] sm:text-[2.25rem] font-extrabold leading-none text-[var(--text-primary)]">{{ totalCategories }}</span>
+        <span class="block text-[0.7rem] sm:text-[0.8rem] text-[var(--text-secondary)] uppercase tracking-wide mt-1">Categories</span>
+      </div>
+    </div>
 
     <!-- Tags -->
-    <mat-card class="!rounded-xl ![box-shadow:0_2px_12px_rgba(0,0,0,0.07)] transition-all duration-200 hover:-translate-y-1 hover:![box-shadow:0_6px_24px_rgba(0,0,0,0.12)]">
-      <mat-card-content class="!flex !items-center !gap-3 sm:!gap-4 !p-4 sm:!p-6">
-        <div class="rounded-xl p-2.5 sm:p-3 shrink-0 bg-[#fff3e0]">
-          <mat-icon class="![font-size:1.5rem] sm:![font-size:1.75rem] ![height:1.5rem] sm:![height:1.75rem] ![width:1.5rem] sm:![width:1.75rem] block text-[#e65100]">label</mat-icon>
-        </div>
-        <div class="min-w-0">
-          <span class="block text-[1.75rem] sm:text-[2.25rem] font-extrabold leading-none text-brand-dark">{{ totalTags }}</span>
-          <span class="block text-[0.7rem] sm:text-[0.8rem] text-[#5f6368] uppercase tracking-wide mt-1">Tags</span>
-        </div>
-      </mat-card-content>
-    </mat-card>
+    <div class="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 shadow-sm
+                flex items-center gap-3 sm:gap-4 p-4 sm:p-6
+                transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
+      <div class="rounded-xl p-2.5 sm:p-3 shrink-0 bg-orange-50 dark:bg-orange-900/20">
+        <mat-icon class="![font-size:1.5rem] sm:![font-size:1.75rem] ![height:1.5rem] sm:![height:1.75rem] ![width:1.5rem] sm:![width:1.75rem] block text-orange-600 dark:text-orange-400">label</mat-icon>
+      </div>
+      <div class="min-w-0">
+        <span class="block text-[1.75rem] sm:text-[2.25rem] font-extrabold leading-none text-[var(--text-primary)]">{{ totalTags }}</span>
+        <span class="block text-[0.7rem] sm:text-[0.8rem] text-[var(--text-secondary)] uppercase tracking-wide mt-1">Tags</span>
+      </div>
+    </div>
   </div>
 
-  <!-- Quick Actions -->
+  <!-- Quick Actions — use <a> tags since these are navigation links -->
   <div>
-    <h3 class="text-[1.05rem] sm:text-[1.1rem] font-semibold text-brand-dark mt-0 mb-4">Quick Actions</h3>
+    <h3 class="text-[1.05rem] sm:text-[1.1rem] font-semibold text-[var(--text-primary)] mt-0 mb-4">Quick Actions</h3>
     <div class="flex flex-wrap gap-3">
-      <a mat-raised-button color="primary" class="!rounded-lg" routerLink="/admin/posts/new">
-        <mat-icon>add</mat-icon> New Post
+      <a routerLink="/admin/posts/new"
+        class="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-lg
+               bg-brand-accent text-white hover:bg-[#c73652] transition-colors duration-150 shadow-sm">
+        <mat-icon class="!text-[1.1rem] !h-[1.1rem] !w-[1.1rem]">add</mat-icon> New Post
       </a>
-      <a mat-stroked-button class="!rounded-lg" routerLink="/admin/posts">
-        <mat-icon>article</mat-icon> Manage Posts
+      <a routerLink="/admin/posts"
+        class="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-lg
+               bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-600
+               text-[var(--text-primary)] hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors duration-150">
+        <mat-icon class="!text-[1.1rem] !h-[1.1rem] !w-[1.1rem]">article</mat-icon> Manage Posts
       </a>
-      <a mat-stroked-button class="!rounded-lg" routerLink="/admin/categories">
-        <mat-icon>category</mat-icon> Manage Categories
+      <a routerLink="/admin/categories"
+        class="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-lg
+               bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-600
+               text-[var(--text-primary)] hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors duration-150">
+        <mat-icon class="!text-[1.1rem] !h-[1.1rem] !w-[1.1rem]">category</mat-icon> Manage Categories
       </a>
-      <a mat-stroked-button class="!rounded-lg" routerLink="/admin/tags">
-        <mat-icon>label</mat-icon> Manage Tags
+      <a routerLink="/admin/tags"
+        class="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-lg
+               bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-600
+               text-[var(--text-primary)] hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors duration-150">
+        <mat-icon class="!text-[1.1rem] !h-[1.1rem] !w-[1.1rem]">label</mat-icon> Manage Tags
       </a>
     </div>
   </div>

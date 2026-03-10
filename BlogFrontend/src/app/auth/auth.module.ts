@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { SharedModule } from '../shared/shared.module';
 import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -25,6 +26,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     MatButtonModule,
     MatIconModule,
     MatProgressSpinnerModule,
+    SharedModule,
     AuthRoutingModule
   ]
 })

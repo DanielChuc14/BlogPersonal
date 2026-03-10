@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./src/**/*.{html,ts}'],
+  darkMode: 'class', // Toggled via ThemeService → html.dark
   corePlugins: {
     preflight: false, // Avoid conflicts with Angular Material base styles
   },

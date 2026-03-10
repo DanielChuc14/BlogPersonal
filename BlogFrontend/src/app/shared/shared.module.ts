@@ -11,6 +11,12 @@ import { FooterComponent } from './components/footer/footer.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { NotificationComponent } from './components/notification/notification.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { ThemeToggleComponent } from './components/theme-toggle/theme-toggle.component';
+import { BtnComponent } from './components/btn/btn.component';
+import { AlertComponent } from './components/alert/alert.component';
+import { DataTableComponent } from './components/data-table/data-table.component';
+import { ModalComponent } from './components/modal/modal.component';
+import { CrudFormComponent } from './components/crud-form/crud-form.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +25,12 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     LoaderComponent,
     NotificationComponent,
     ConfirmDialogComponent,
+    ThemeToggleComponent,
+    BtnComponent,
+    AlertComponent,
+    DataTableComponent,
+    ModalComponent,
+    CrudFormComponent,
   ],
   imports: [
     CommonModule,
@@ -35,6 +47,12 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     LoaderComponent,
     NotificationComponent,
     ConfirmDialogComponent,
+    ThemeToggleComponent,
+    BtnComponent,
+    AlertComponent,
+    DataTableComponent,
+    ModalComponent,
+    CrudFormComponent,
   ]
 })
 export class SharedModule {}

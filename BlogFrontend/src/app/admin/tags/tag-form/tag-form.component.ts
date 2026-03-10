@@ -15,6 +15,7 @@ export class TagFormComponent implements OnInit {
   tagId?: number;
   loading = false;
   saving = false;
+  errorMessage = '';
 
   constructor(
     private fb: FormBuilder,
@@ -39,7 +40,10 @@ export class TagFormComponent implements OnInit {
           this.form.patchValue({ name: tag.name, description: tag.description ?? '' });
           this.loading = false;
         },
-        error: () => { this.loading = false; }
+        error: () => {
+          this.loading = false;
+          this.errorMessage = 'Failed to load tag data. Please go back and try again.';
+        }
       });
     }
   }
@@ -47,6 +51,7 @@ export class TagFormComponent implements OnInit {
   onSubmit(): void {
     if (this.form.invalid) return;
     this.saving = true;
+    this.errorMessage = '';
 
     const save$: Observable<any> = this.isEdit && this.tagId
       ? this.tagService.update(this.tagId, this.form.value)
@@ -54,7 +59,10 @@ export class TagFormComponent implements OnInit {
 
     save$.subscribe({
       next: () => { this.saving = false; this.router.navigate(['/admin/tags']); },
-      error: () => { this.saving = false; }
+      error: () => {
+        this.saving = false;
+        this.errorMessage = this.isEdit ? 'Failed to update tag.' : 'Failed to create tag.';
+      }
     });
   }
 

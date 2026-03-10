@@ -1,55 +1,36 @@
 <div class="max-w-[1200px] mx-auto animate-fade-in">
   <div class="flex items-center justify-between mb-6 flex-wrap gap-4">
-    <h2 class="text-[1.35rem] sm:text-[1.75rem] font-bold text-brand-dark m-0">Permissions</h2>
-    <button mat-raised-button color="primary" (click)="newPermission()">
+    <h2 class="text-[1.35rem] sm:text-[1.75rem] font-bold text-[var(--text-primary)] m-0">Permissions</h2>
+    <app-btn variant="primary" (btnClick)="newPermission()">
       <mat-icon>add</mat-icon> New Permission
-    </button>
+    </app-btn>
   </div>
 
-  @if (loading) {
-    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-  }
+  <app-data-table
+    [columns]="['Permission', 'Description', 'Actions']"
+    [loading]="loading"
+    [isEmpty]="!loading && permissions.length === 0"
+    emptyIcon="vpn_key"
+    emptyMessage="No permissions yet.">
 
-  <mat-card>
-    <div class="overflow-x-auto rounded-lg">
-      <table mat-table [dataSource]="permissions" class="full-width">
-
-        <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef>Permission</th>
-          <td mat-cell *matCellDef="let p" class="cell-title">
-            <span class="category-chip">
-              <mat-icon>vpn_key</mat-icon> {{ p.name }}
-            </span>
-          </td>
-        </ng-container>
-
-        <ng-container matColumnDef="description">
-          <th mat-header-cell *matHeaderCellDef>Description</th>
-          <td mat-cell *matCellDef="let p" class="cell-desc">{{ p.description || '—' }}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="actions">
-          <th mat-header-cell *matHeaderCellDef class="col-actions">Actions</th>
-          <td mat-cell *matCellDef="let p" class="col-actions">
-            <button mat-icon-button color="primary" (click)="editPermission(p.id)" matTooltip="Edit">
-              <mat-icon>edit</mat-icon>
-            </button>
-            <button mat-icon-button color="warn" (click)="deletePermission(p)" matTooltip="Delete">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="table-row"></tr>
-      </table>
-    </div>
-
-    @if (!loading && permissions.length === 0) {
-      <div class="text-center py-12 px-8 text-[#5f6368] italic">
-        <mat-icon class="![font-size:3rem] ![height:3rem] ![width:3rem] block mx-auto mb-4 opacity-40">vpn_key</mat-icon>
-        <p class="m-0">No permissions yet.</p>
-      </div>
+    @for (p of permissions; track p.id) {
+      <tr class="tbl-row">
+        <td class="tbl-cell">
+          <span class="inline-flex items-center gap-1.5 font-medium">
+            <mat-icon class="!text-[1rem] !h-4 !w-4 text-[var(--text-secondary)]">vpn_key</mat-icon>
+            {{ p.name }}
+          </span>
+        </td>
+        <td class="tbl-cell-muted">{{ p.description || '—' }}</td>
+        <td class="tbl-cell-actions">
+          <app-btn variant="icon" (btnClick)="editPermission(p.id)" title="Edit">
+            <mat-icon class="!text-blue-500 dark:!text-blue-400">edit</mat-icon>
+          </app-btn>
+          <app-btn variant="icon" (btnClick)="deletePermission(p)" title="Delete">
+            <mat-icon class="!text-red-500 dark:!text-red-400">delete</mat-icon>
+          </app-btn>
+        </td>
+      </tr>
     }
-  </mat-card>
+  </app-data-table>
 </div>

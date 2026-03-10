@@ -1,0 +1,102 @@
+:host {
+  display: inline-flex;
+}
+
+// ── Base ────────────────────────────────────────────────────────────────────
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-family: inherit;
+  line-height: 1;
+  border: none;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  outline: none;
+  text-decoration: none;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+  user-select: none;
+  white-space: nowrap;
+
+  // Sizes
+  &--sm { padding: 0.375rem 0.75rem; font-size: 0.75rem; }
+  &--md { padding: 0.5rem 1rem;      font-size: 0.875rem; }
+  &--lg { padding: 0.625rem 1.25rem; font-size: 0.875rem; }
+
+  &:disabled { opacity: 0.6; cursor: not-allowed; pointer-events: none; }
+
+  .spinner {
+    width: 1rem;
+    height: 1rem;
+    flex-shrink: 0;
+    animation: btn-spin 0.7s linear infinite;
+  }
+}
+
+// ── Variants ─────────────────────────────────────────────────────────────────
+.btn--primary {
+  background: #e94560;
+  color: #fff;
+  box-shadow: 0 1px 3px rgba(233,69,96,0.3);
+
+  &:hover:not(:disabled) { background: #c73652; }
+  &:active:not(:disabled) { background: #b02d47; }
+  &:focus-visible { box-shadow: 0 0 0 3px rgba(233,69,96,0.35); }
+}
+
+.btn--secondary {
+  background: var(--surface);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+
+  &:hover:not(:disabled) { background: var(--surface-alt); }
+  &:focus-visible { box-shadow: 0 0 0 3px rgba(100,116,139,0.2); }
+}
+
+.btn--danger {
+  background: #dc2626;
+  color: #fff;
+  box-shadow: 0 1px 3px rgba(220,38,38,0.3);
+
+  &:hover:not(:disabled) { background: #b91c1c; }
+  &:active:not(:disabled) { background: #991b1b; }
+  &:focus-visible { box-shadow: 0 0 0 3px rgba(220,38,38,0.35); }
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--text-primary);
+
+  &:hover:not(:disabled) { background: rgba(0,0,0,0.06); }
+  &:focus-visible { box-shadow: 0 0 0 3px rgba(0,0,0,0.12); }
+
+  html.dark & {
+    &:hover:not(:disabled) { background: rgba(255,255,255,0.08); }
+  }
+}
+
+.btn--icon {
+  padding: 0.5rem;
+  background: transparent;
+  color: var(--text-secondary);
+  border-radius: 0.5rem;
+
+  // Override size padding for icon variant
+  &.btn--sm { padding: 0.25rem; }
+  &.btn--lg { padding: 0.625rem; }
+
+  &:hover:not(:disabled) { background: rgba(0,0,0,0.06); }
+  &:focus-visible { box-shadow: 0 0 0 3px rgba(0,0,0,0.12); }
+
+  html.dark & {
+    &:hover:not(:disabled) { background: rgba(255,255,255,0.08); }
+  }
+}
+
+@keyframes btn-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}

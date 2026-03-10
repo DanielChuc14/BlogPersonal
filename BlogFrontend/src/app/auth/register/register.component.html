@@ -61,7 +61,7 @@
             <mat-icon class="auth-header__icon">person_add</mat-icon>
           </div>
           <h2 class="text-[1.5rem] sm:text-[1.75rem] font-bold text-brand-dark mt-0 mb-1.5 tracking-tight">Create account</h2>
-          <p class="text-slate-500 m-0 text-[0.875rem]">Join MyBlog today â€? it's free</p>
+          <p class="text-slate-500 m-0 text-[0.875rem]">Join MyBlog today â€” it's free</p>
         </div>
 
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -114,27 +114,34 @@
           }
 
           @if (errorMessages.length > 0) {
-            <div class="flex items-start gap-2.5 bg-red-50 border border-red-200 rounded-xl px-4 py-3 text-red-700 text-sm mb-5 animate-fade-in">
-              <mat-icon class="!text-[1.1rem] !h-[1.1rem] !w-[1.1rem] shrink-0 mt-px">error_outline</mat-icon>
+            <app-alert type="danger" class="block mb-5">
               <div class="flex flex-col gap-0.5">
                 @for (err of errorMessages; track err) { <span>{{ err }}</span> }
               </div>
-            </div>
+            </app-alert>
           }
 
-          <button mat-raised-button color="primary" type="submit"
-            class="auth-submit-btn full-width !h-12 !text-base !font-semibold !rounded-xl !flex !items-center !justify-center !gap-2 !text-white"
+          <button type="submit"
+            class="w-full h-12 flex items-center justify-center gap-2 px-5 text-base font-semibold rounded-xl
+                   bg-brand-accent text-white hover:bg-[#c73652] active:bg-[#b02d47]
+                   transition-colors duration-150 shadow-sm disabled:opacity-60 disabled:cursor-not-allowed"
             [disabled]="loading">
-            @if (loading) { <mat-spinner diameter="20"></mat-spinner> }
-            @else { Create Account }
+            @if (loading) {
+              <svg class="w-5 h-5 animate-spin" viewBox="0 0 24 24" fill="none">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+              </svg>
+            }
+            Create Account
           </button>
         </form>
-          <div class="text-center mt-7 pt-6 border-t border-black/[.06]">
-            <a mat-button class="!text-slate-500 !text-[0.875rem] hover:!text-blue-600 !transition-colors !duration-150 !gap-1" routerLink="/login">
-              <mat-icon class="![font-size:1rem] ![height:1rem] ![width:1rem] align-middle">arrow_back</mat-icon>
-              Back to Sign In
-            </a>
-          </div>
+
+        <div class="text-center mt-7 pt-6 border-t border-black/[.06]">
+          <a class="inline-flex items-center gap-1 text-slate-500 text-[0.875rem] hover:text-blue-600 transition-colors duration-150 font-medium" routerLink="/login">
+            <mat-icon class="![font-size:1rem] ![height:1rem] ![width:1rem] align-middle">arrow_back</mat-icon>
+            Back to Sign In
+          </a>
+        </div>
       </div>
 
       <div class="text-center mt-6">

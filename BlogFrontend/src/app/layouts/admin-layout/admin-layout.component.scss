@@ -81,15 +81,16 @@
 }
 
 .admin-toolbar {
-  background: #ffffff !important;
-  border-bottom: 1px solid rgba(0,0,0,0.08);
+  background: var(--surface) !important;
+  border-bottom: 1px solid var(--border);
   box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-  color: #1a1a2e !important;
+  color: var(--text-primary) !important;
   position: sticky;
   top: 0;
   z-index: 10;
+  transition: background 0.2s ease, color 0.2s ease;
 
-  .menu-toggle { color: #1a1a2e; }
+  .menu-toggle { color: var(--text-primary); }
 
   .toolbar-title {
     font-weight: 600;
@@ -100,7 +101,7 @@
   .spacer { flex: 1 1 auto; }
 
   .toolbar-user mat-icon {
-    color: #5f6368;
+    color: var(--text-secondary);
     font-size: 2rem;
     height: 2rem;
     width: 2rem;
@@ -110,7 +111,8 @@
 .admin-content {
   display: flex;
   flex-direction: column;
-  background: #f5f7fa;
+  background: var(--surface-alt);
+  transition: background 0.2s ease;
 
   &__body {
     padding: 2rem;
