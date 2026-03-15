@@ -7,7 +7,7 @@
   </div>
 
   <app-data-table
-    [columns]="['Role Name', 'Actions']"
+    [columns]="['Role Name', 'Permissions', 'Actions']"
     [loading]="loading"
     [isEmpty]="!loading && roles.length === 0"
     emptyIcon="shield"
@@ -21,11 +21,19 @@
             {{ r.name }}
           </span>
         </td>
+        <td class="tbl-cell">
+          <a [routerLink]="['/admin/roles', r.id, 'permissions']"
+             class="inline-flex items-center gap-1 text-xs font-medium text-blue-600 dark:text-blue-400
+                    hover:text-blue-800 dark:hover:text-blue-200 hover:underline transition-colors duration-150">
+            <mat-icon class="!text-[0.85rem] !h-[0.85rem] !w-[0.85rem]">vpn_key</mat-icon>
+            Manage
+          </a>
+        </td>
         <td class="tbl-cell-actions">
-          <app-btn variant="icon" (btnClick)="editRole(r.id)" title="Edit">
+          <app-btn variant="icon" (btnClick)="editRole(r.id)" matTooltip="Edit role">
             <mat-icon class="!text-blue-500 dark:!text-blue-400">edit</mat-icon>
           </app-btn>
-          <app-btn variant="icon" (btnClick)="deleteRole(r)" title="Delete">
+          <app-btn variant="icon" (btnClick)="deleteRole(r)" matTooltip="Delete role">
             <mat-icon class="!text-red-500 dark:!text-red-400">delete</mat-icon>
           </app-btn>
         </td>

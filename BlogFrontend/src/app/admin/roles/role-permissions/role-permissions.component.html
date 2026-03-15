@@ -1,0 +1,142 @@
+<div class="max-w-[1200px] mx-auto animate-fade-in">
+
+  <!-- Header -->
+  <div class="flex items-center justify-between mb-6 flex-wrap gap-4">
+    <div>
+      <h2 class="text-[1.35rem] sm:text-[1.75rem] font-bold text-[var(--text-primary)] m-0">
+        Manage Permissions
+      </h2>
+      @if (roleName) {
+        <p class="text-[var(--text-secondary)] text-sm m-0 mt-1">
+          Role: <strong class="text-[var(--text-primary)]">{{ roleName }}</strong>
+        </p>
+      }
+    </div>
+    <app-btn variant="secondary" type="button" (btnClick)="back()">
+      <mat-icon>arrow_back</mat-icon> Back to Roles
+    </app-btn>
+  </div>
+
+  @if (loading) {
+    <div class="flex justify-center items-center py-20">
+      <mat-progress-spinner mode="indeterminate" diameter="44"></mat-progress-spinner>
+    </div>
+  } @else {
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+      <!-- ── Assigned permissions ── -->
+      <div class="rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-5 flex flex-col gap-4">
+
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-lg bg-emerald-50 dark:bg-emerald-900/20 flex items-center justify-center shrink-0">
+            <mat-icon class="!text-[1rem] !h-4 !w-4 text-emerald-600 dark:text-emerald-400">check_circle</mat-icon>
+          </div>
+          <h3 class="font-semibold text-[var(--text-primary)] m-0 text-[0.9rem]">
+            Assigned
+            <span class="ml-1.5 px-2 py-0.5 rounded-full text-xs font-bold
+                         bg-emerald-100 text-emerald-700
+                         dark:bg-emerald-900/30 dark:text-emerald-300">
+              {{ assigned.length }}
+            </span>
+          </h3>
+        </div>
+
+        @if (assigned.length === 0) {
+          <div class="flex flex-col items-center py-10 text-center">
+            <mat-icon class="!text-[2.5rem] !h-10 !w-10 text-[var(--text-secondary)] opacity-30 mb-3">vpn_key_off</mat-icon>
+            <p class="text-[var(--text-secondary)] text-sm m-0">No permissions assigned yet.</p>
+            <p class="text-[var(--text-secondary)] text-xs m-0 mt-1">Add from the list on the right.</p>
+          </div>
+        } @else {
+          <div class="flex flex-wrap gap-2">
+            @for (perm of assigned; track perm) {
+              <span class="inline-flex items-center gap-1.5 pl-3 pr-2 py-1.5 rounded-full text-xs font-semibold
+                           bg-emerald-50 text-emerald-700 border border-emerald-200
+                           dark:bg-emerald-900/20 dark:text-emerald-300 dark:border-emerald-800">
+                <mat-icon class="!text-[0.8rem] !h-[0.8rem] !w-[0.8rem] shrink-0">vpn_key</mat-icon>
+                {{ perm }}
+                <button
+                  type="button"
+                  (click)="removePermission(perm)"
+                  [matTooltip]="'Remove ' + perm"
+                  class="ml-0.5 w-4 h-4 flex items-center justify-center rounded-full bg-transparent border-none
+                         cursor-pointer opacity-50 hover:opacity-100
+                         hover:bg-red-100 dark:hover:bg-red-900/30
+                         hover:text-red-600 dark:hover:text-red-400
+                         transition-all duration-150">
+                  <mat-icon class="!text-[0.75rem] !h-[0.75rem] !w-[0.75rem]">close</mat-icon>
+                </button>
+              </span>
+            }
+          </div>
+        }
+      </div>
+
+      <!-- ── Available permissions ── -->
+      <div class="rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm p-5 flex flex-col gap-4">
+
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center shrink-0">
+            <mat-icon class="!text-[1rem] !h-4 !w-4 text-blue-600 dark:text-blue-400">add_circle_outline</mat-icon>
+          </div>
+          <h3 class="font-semibold text-[var(--text-primary)] m-0 text-[0.9rem]">
+            Available
+            <span class="ml-1.5 px-2 py-0.5 rounded-full text-xs font-bold
+                         bg-blue-100 text-blue-700
+                         dark:bg-blue-900/30 dark:text-blue-300">
+              {{ available.length }}
+            </span>
+          </h3>
+        </div>
+
+        <!-- Search -->
+        <div class="relative">
+          <mat-icon class="absolute left-3 top-1/2 -translate-y-1/2 !text-[1rem] !h-4 !w-4
+                           text-[var(--text-secondary)] pointer-events-none">search</mat-icon>
+          <input
+            type="text"
+            placeholder="Filter permissions..."
+            [value]="searchTerm"
+            (input)="searchTerm = $any($event.target).value"
+            class="w-full pl-9 pr-4 py-2 text-sm rounded-lg
+                   border border-gray-200 dark:border-slate-600
+                   bg-gray-50 dark:bg-slate-700/50
+                   text-[var(--text-primary)] placeholder:text-[var(--text-secondary)]
+                   focus:outline-none focus:ring-2 focus:ring-brand-accent/30 focus:border-brand-accent/50
+                   transition duration-150" />
+        </div>
+
+        @if (filteredAvailable.length === 0) {
+          <div class="flex flex-col items-center py-10 text-center">
+            <mat-icon class="!text-[2.5rem] !h-10 !w-10 text-[var(--text-secondary)] opacity-30 mb-3">
+              {{ searchTerm ? 'search_off' : 'playlist_add_check' }}
+            </mat-icon>
+            <p class="text-[var(--text-secondary)] text-sm m-0">
+              {{ searchTerm ? 'No permissions match your search.' : 'All permissions are already assigned.' }}
+            </p>
+          </div>
+        } @else {
+          <ul class="flex flex-col divide-y divide-gray-100 dark:divide-slate-700/60 max-h-72 overflow-y-auto -mx-1 px-1">
+            @for (p of filteredAvailable; track p.id) {
+              <li class="flex items-center justify-between gap-3 py-2.5
+                         hover:bg-gray-50 dark:hover:bg-slate-700/40
+                         rounded-lg px-2 transition-colors duration-150">
+                <div class="min-w-0">
+                  <p class="text-sm font-medium text-[var(--text-primary)] m-0 truncate">{{ p.name }}</p>
+                  @if (p.description) {
+                    <p class="text-xs text-[var(--text-secondary)] m-0 mt-0.5 truncate">{{ p.description }}</p>
+                  }
+                </div>
+                <app-btn variant="secondary" size="sm" (btnClick)="addPermission(p)">
+                  <mat-icon class="!text-[0.85rem] !h-[0.85rem] !w-[0.85rem]">add</mat-icon>
+                  Add
+                </app-btn>
+              </li>
+            }
+          </ul>
+        }
+      </div>
+
+    </div>
+  }
+</div>

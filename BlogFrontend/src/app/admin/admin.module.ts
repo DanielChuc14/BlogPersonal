@@ -42,6 +42,7 @@ import { TagFormComponent } from './tags/tag-form/tag-form.component';
 // Roles
 import { RolesComponent } from './roles/roles.component';
 import { RoleFormComponent } from './roles/role-form/role-form.component';
+import { RolePermissionsComponent } from './roles/role-permissions/role-permissions.component';
 
 // Permissions
 import { PermissionsComponent } from './permissions/permissions.component';
@@ -63,6 +64,7 @@ import { AuditLogComponent } from './audit-log/audit-log.component';
     TagFormComponent,
     RolesComponent,
     RoleFormComponent,
+    RolePermissionsComponent,
     PermissionsComponent,
     PermissionFormComponent,
     AuditLogComponent

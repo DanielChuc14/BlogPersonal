@@ -86,6 +86,9 @@ export class AuthService {
 
   private restoreToken(): void {
     const token = this.secureStorage.getItem<string>(this.TOKEN_KEY);
-    if (token) this._token = token;
+    if (token) {
+      console.log("token",token);
+      this._token = token;
+    }
   }
 }

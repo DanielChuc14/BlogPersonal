@@ -12,6 +12,7 @@ import { TagsComponent } from './tags/tags.component';
 import { TagFormComponent } from './tags/tag-form/tag-form.component';
 import { RolesComponent } from './roles/roles.component';
 import { RoleFormComponent } from './roles/role-form/role-form.component';
+import { RolePermissionsComponent } from './roles/role-permissions/role-permissions.component';
 import { PermissionsComponent } from './permissions/permissions.component';
 import { PermissionFormComponent } from './permissions/permission-form/permission-form.component';
 import { AuditLogComponent } from './audit-log/audit-log.component';
@@ -37,6 +38,7 @@ const routes: Routes = [
       { path: 'roles', component: RolesComponent },
       { path: 'roles/new', component: RoleFormComponent },
       { path: 'roles/edit/:id', component: RoleFormComponent },
+      { path: 'roles/:id/permissions', component: RolePermissionsComponent },
       { path: 'permissions', component: PermissionsComponent },
       { path: 'permissions/new', component: PermissionFormComponent },
       { path: 'permissions/edit/:id', component: PermissionFormComponent },
